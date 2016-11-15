@@ -1,6 +1,6 @@
 # StartLauncher
 
-[![Build Status](https://travis-ci.org/matthiaslischka/StartLauncher.svg?branch=master)](https://travis-ci.org/matthiaslischka/StartLauncher)
+[![Build status](https://ci.appveyor.com/api/projects/status/qy1io2k9kt00be3p?svg=true)](https://ci.appveyor.com/project/matthiaslischka/startlauncher)
 
 Launcher that uses Windows Start Menu for custom Commands
 ### WIP
