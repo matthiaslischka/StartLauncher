@@ -9,13 +9,15 @@ namespace StartLauncher.App
     {
         public void EnsureCommands()
         {
-            var commands = DataAccessor.GetInstance().LoadCommands();
+            var commands = DataAccessor.GetInstance().GetCommands();
             foreach (var command in commands)
             {
                 var commandFileInfo = command.GetCommandFileInfo();
 
                 if (commandFileInfo.Exists)
                     commandFileInfo.Delete();
+
+                Directory.CreateDirectory(commandFileInfo.DirectoryName);
 
                 var streamWriter = new StreamWriter(commandFileInfo.FullName);
                 streamWriter.WriteLine(command.Command);

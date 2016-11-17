@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace StartLauncher.App
@@ -15,7 +16,7 @@ namespace StartLauncher.App
             return _dataAccessor ?? (_dataAccessor = new DataAccessor());
         }
 
-        public List<CommandDto> LoadCommands()
+        public List<CommandDto> GetCommands()
         {
             if (!File.Exists(CommandsJsonFile)) return new List<CommandDto>();
 
@@ -44,9 +45,38 @@ namespace StartLauncher.App
             {
                 using (var textWriter = new JsonTextWriter(streamWriter))
                 {
+                    textWriter.Formatting = Formatting.Indented;
                     new JsonSerializer().Serialize(textWriter, commands);
                 }
             }
+
+            new CommandsPopulator().EnsureCommands();
+        }
+
+        public void DeleteCommand(CommandDto command)
+        {
+            var commands = GetCommands();
+            commands.RemoveAll(c => c.Id == command.Id);
+            SaveCommands(commands);
+
+            new CommandsPopulator().EnsureCommands();
+        }
+
+        public void SaveCommand(CommandDto command)
+        {
+            var commands = GetCommands();
+            var persistingCommand = commands.SingleOrDefault(c => c.Id == command.Id);
+            if (persistingCommand == null)
+            {
+                persistingCommand = new CommandDto();
+                commands.Add(persistingCommand);
+            }
+            persistingCommand.Name = command.Name;
+            persistingCommand.Command = command.Command;
+            persistingCommand.Description = command.Description;
+            SaveCommands(commands);
+
+            new CommandsPopulator().EnsureCommands();
         }
     }
 }

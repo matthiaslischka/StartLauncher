@@ -12,6 +12,8 @@ namespace StartLauncher.App
         {
             InitializeComponent();
 
+            commandsListView.ItemsSource = DataAccessor.GetInstance().GetCommands();
+
             var trayMenu = new ContextMenu();
             trayMenu.MenuItems.Add("Exit", OnExit);
 
@@ -42,6 +44,40 @@ namespace StartLauncher.App
                 Hide();
 
             base.OnStateChanged(e);
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            OpenEditWindow(new CommandDto());
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            var selectedCommandDto = commandsListView.SelectedItem as CommandDto;
+            if (selectedCommandDto == null)
+                return;
+
+            OpenEditWindow(selectedCommandDto);
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+            var selectedCommandDto = commandsListView.SelectedItem as CommandDto;
+            if (selectedCommandDto == null)
+                return;
+
+            DataAccessor.GetInstance().DeleteCommand(selectedCommandDto);
+        }
+
+        private void commandsListView_MouseDoubleClick(object sender, EventArgs e)
+        {
+            editButton_Click(sender, e);
+        }
+
+        private static void OpenEditWindow(CommandDto commandDto)
+        {
+            var editWindow = new EditWindow(commandDto);
+            editWindow.Show();
         }
     }
 }

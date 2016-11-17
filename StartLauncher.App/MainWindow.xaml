@@ -6,8 +6,19 @@
         mc:Ignorable="d"
         Title="Start Launcher" Height="350" Width="525"
         ShowInTaskbar="False"
-        Visibility="Hidden">
+        Visibility="Visible">
     <Grid>
-        
+        <ListView x:Name="commandsListView" HorizontalAlignment="Left" Height="299" VerticalAlignment="Top" Width="417" Margin="10,10,0,0" MouseDoubleClick="commandsListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
+        <Button x:Name="editButton" Content="Edit" HorizontalAlignment="Left" Margin="432,35,0,0" VerticalAlignment="Top" Width="75" Click="editButton_Click"/>
+        <Button x:Name="removeButton" Content="Remove" HorizontalAlignment="Left" Margin="432,60,0,0" VerticalAlignment="Top" Width="75" Click="removeButton_Click"/>
+        <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" Margin="432,289,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>
