@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
@@ -12,9 +13,10 @@ namespace StartLauncher.App
         {
             InitializeComponent();
 
-            commandsListView.ItemsSource = DataAccessor.GetInstance().GetCommands();
+            CommandsListView.ItemsSource = DataAccessor.GetInstance().GetCommands();
 
             var trayMenu = new ContextMenu();
+            trayMenu.MenuItems.Add("Settings...", OnOpen);
             trayMenu.MenuItems.Add("Exit", OnExit);
 
             var notifyIcon = new NotifyIcon
@@ -25,12 +27,20 @@ namespace StartLauncher.App
                 Visible = true
             };
 
-            notifyIcon.DoubleClick +=
-                delegate
-                {
-                    Show();
-                    WindowState = WindowState.Normal;
-                };
+            notifyIcon.DoubleClick += OnOpen;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            ShowInTaskbar = false;
+            Visibility = Visibility.Hidden;
+        }
+        private void OnOpen(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = WindowState.Normal;
+            ShowInTaskbar = true;
         }
 
         private void OnExit(object sender, EventArgs e)
@@ -46,32 +56,32 @@ namespace StartLauncher.App
             base.OnStateChanged(e);
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
             OpenEditWindow(new CommandDto());
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
-            var selectedCommandDto = commandsListView.SelectedItem as CommandDto;
+            var selectedCommandDto = CommandsListView.SelectedItem as CommandDto;
             if (selectedCommandDto == null)
                 return;
 
             OpenEditWindow(selectedCommandDto);
         }
 
-        private void removeButton_Click(object sender, EventArgs e)
+        private void RemoveButton_Click(object sender, EventArgs e)
         {
-            var selectedCommandDto = commandsListView.SelectedItem as CommandDto;
+            var selectedCommandDto = CommandsListView.SelectedItem as CommandDto;
             if (selectedCommandDto == null)
                 return;
 
             DataAccessor.GetInstance().DeleteCommand(selectedCommandDto);
         }
 
-        private void commandsListView_MouseDoubleClick(object sender, EventArgs e)
+        private void CommandsListView_MouseDoubleClick(object sender, EventArgs e)
         {
-            editButton_Click(sender, e);
+            EditButton_Click(sender, e);
         }
 
         private static void OpenEditWindow(CommandDto commandDto)

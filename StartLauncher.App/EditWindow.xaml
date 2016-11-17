@@ -5,14 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StartLauncher.App"
         mc:Ignorable="d"
-        Title="EditWindow" Height="154.699" Width="194.458">
+        Title="Edit Command" Height="280" Width="390">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="166"/>
-        <TextBox x:Name="commandTextBox" HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="{Binding Command}" VerticalAlignment="Top" Width="166"/>
-        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="23" Margin="10,66,0,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" Width="166"/>
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="75" Click="saveButton_Click"/>
-        <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="101,94,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Label x:Name="NameLabel" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top"
+               Grid.Row="0" Grid.Column="0" />
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Stretch" Height="23" Margin="5" TextWrapping="Wrap"
+                 Text="{Binding Name}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+        <Label x:Name="CommandLabel" Content="Command" HorizontalAlignment="Left"
+               VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" />
+        <TextBox x:Name="CommandTextBox" HorizontalAlignment="Stretch" Margin="5"
+                 Text="{Binding Command}" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True"
+                 Grid.Row="3" Grid.Column="0" />
+        <Label x:Name="DescriptionLabel" Content="Description" HorizontalAlignment="Left"
+               VerticalAlignment="Top" Grid.Row="4" Grid.Column="0" />
+        <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Stretch" Height="23" Margin="5" TextWrapping="Wrap"
+                 Text="{Binding Description}" VerticalAlignment="Top" Grid.Row="5" Grid.Column="0" />
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Bottom"
+                    Width="75" Click="SaveButton_Click" Grid.Row="0" Grid.Column="0" />
+            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="5"
+                    VerticalAlignment="Bottom" Width="75" Grid.Row="0" Grid.Column="1" Click="CancelButton_Click" />
+        </Grid>
     </Grid>
 </Window>

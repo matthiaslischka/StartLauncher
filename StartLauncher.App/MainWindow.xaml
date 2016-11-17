@@ -4,21 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Start Launcher" Height="350" Width="525"
+        Title="Start Launcher" Height="400" Width="600"
         ShowInTaskbar="False"
         Visibility="Visible">
     <Grid>
-        <ListView x:Name="commandsListView" HorizontalAlignment="Left" Height="299" VerticalAlignment="Top" Width="417" Margin="10,10,0,0" MouseDoubleClick="commandsListView_MouseDoubleClick">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+        <ListView x:Name="CommandsListView" MouseDoubleClick="CommandsListView_MouseDoubleClick" Margin="5"
+                  Grid.Row="0" Grid.Column="0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Command" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click"/>
-        <Button x:Name="editButton" Content="Edit" HorizontalAlignment="Left" Margin="432,35,0,0" VerticalAlignment="Top" Width="75" Click="editButton_Click"/>
-        <Button x:Name="removeButton" Content="Remove" HorizontalAlignment="Left" Margin="432,60,0,0" VerticalAlignment="Top" Width="75" Click="removeButton_Click"/>
-        <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" Margin="432,289,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
+            <Button x:Name="AddButton" Content="Add..." HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top"
+                    Width="75" Click="AddButton_Click" Grid.Row="0" Grid.Column="0" />
+            <Button x:Name="EditButton" Content="Edit..." HorizontalAlignment="Right" Margin="5"
+                    VerticalAlignment="Top"
+                    Width="75" Click="EditButton_Click" Grid.Row="1" Grid.Column="0" />
+            <Button x:Name="RemoveButton" Content="Remove" HorizontalAlignment="Right" Margin="5"
+                    VerticalAlignment="Top" Width="75" Click="RemoveButton_Click" Grid.Row="2" Grid.Column="0" />
+            <Button x:Name="SettingsButton" Content="Settings..." HorizontalAlignment="Right" Margin="5"
+                    VerticalAlignment="Bottom" Width="75" Grid.Row="3" Grid.Column="0" />
+        </Grid>
     </Grid>
 </Window>
