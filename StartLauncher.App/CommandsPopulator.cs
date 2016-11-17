@@ -31,7 +31,8 @@ namespace StartLauncher.App
                 Directory.CreateDirectory(commandFileInfo.DirectoryName);
 
                 var streamWriter = new StreamWriter(commandFileInfo.FullName);
-                streamWriter.WriteLine(command.Command);
+                streamWriter.WriteLine("echo off");
+                streamWriter.WriteLine("start \"\" /B " + command.Command);
                 streamWriter.Close();
 
                 AddShortcutForCommand(command);
