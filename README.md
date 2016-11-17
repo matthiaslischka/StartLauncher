@@ -16,4 +16,4 @@ Launcher that uses Windows Start Menu for custom Commands
 * Add Command Icons
 
 #### Note
-* Remove if debug hack asap
+* ~~Remove if debug hack asap~~
