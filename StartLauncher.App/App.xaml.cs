@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 
 namespace StartLauncher.App
 {
@@ -8,9 +7,7 @@ namespace StartLauncher.App
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            var commandsPopulator = new CommandsPopulator();
-            commandsPopulator.EnsureCommands();
+            CommandsPopulator.GetInstance().EnsureCommands();
         }
     }
 }

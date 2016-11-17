@@ -7,9 +7,13 @@ namespace StartLauncher.App
 {
     public class DataAccessor
     {
-        public const string CommandsJsonFile = @"commands.json";
+        private const string CommandsJsonFile = @"commands.json";
 
         private static DataAccessor _dataAccessor;
+
+        private DataAccessor()
+        {
+        }
 
         public static DataAccessor GetInstance()
         {
@@ -50,7 +54,7 @@ namespace StartLauncher.App
                 }
             }
 
-            new CommandsPopulator().EnsureCommands();
+            CommandsPopulator.GetInstance().EnsureCommands();
         }
 
         public void DeleteCommand(CommandDto command)
@@ -59,7 +63,7 @@ namespace StartLauncher.App
             commands.RemoveAll(c => c.Id == command.Id);
             SaveCommands(commands);
 
-            new CommandsPopulator().EnsureCommands();
+            CommandsPopulator.GetInstance().EnsureCommands();
         }
 
         public void SaveCommand(CommandDto command)
@@ -76,7 +80,7 @@ namespace StartLauncher.App
             persistingCommand.Description = command.Description;
             SaveCommands(commands);
 
-            new CommandsPopulator().EnsureCommands();
+            CommandsPopulator.GetInstance().EnsureCommands();
         }
     }
 }
