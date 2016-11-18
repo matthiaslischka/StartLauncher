@@ -8,8 +8,8 @@ Launcher that uses Windows Start Menu for custom Commands
 #### Next Steps
 * Cleanup Shortcut and Command Folder on Startup
 * ~~List Commands in UI~~
-* *Add/Remove Commands via UI*
-* Watch file for changes and update commands on the fly
+* ~~Add/Remove Commands via UI*~~
+* ~~Watch file for changes and update commands on the fly~~
 * Add to Start Menu without admin rights
 * commands.json file path configurable
 * Multiple commands files combinable from different locations
@@ -17,11 +17,7 @@ Launcher that uses Windows Start Menu for custom Commands
 * Run as Administrator
 * Add Command Icons
 
-#### Known Issues
-* Serializing a Command with "?" in the Name
 
-#### Note
-* ~~Remove if debug hack asap~~
 
 
 ![screenshot program](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/screenshot.png)
