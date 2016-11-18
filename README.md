@@ -21,7 +21,8 @@ C:\Users\[YOURUSERNAME]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\St
 
 ![screenshot start menu](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/startmenu.png)
 # Useful commands for daily work
-**cmd.exe is the limit. there is no limit**
+**cmd.exe is the limit. there is no limit.**
+
 Open internet explorer with new session and specific url
 ```
 iexplore.exe -noframemerging http://localhost/myDevProject/start.aspx
