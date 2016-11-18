@@ -11,11 +11,13 @@ Launcher that uses Windows Start Menu for custom Commands
 * ~~Add/Remove Commands via UI*~~
 * ~~Watch file for changes and update commands on the fly~~
 * ~~Add to Start Menu without admin rights~~
-* commands.json file path configurable
+* Commands.json file path configurable (project settings + UI)
 * Multiple commands files combinable from different locations
-* Test Commands in UI Edit-View
-* Run as Administrator
-* Add Command Icons
+* "Test Commands" button in UI edit-view
+* "Run as Administrator" option for commands
+* Add command icons
+* Shortcuts für Add, Remove, Edit
+
 
 
 
