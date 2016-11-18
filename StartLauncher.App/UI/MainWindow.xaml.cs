@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
+using StartLauncher.App.Core;
+using StartLauncher.App.DataAccess;
 using Application = System.Windows.Application;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.UI
 {
     public partial class MainWindow
     {
         private MainWindow()
         {
             InitializeComponent();
-            CommandsListView.ItemsSource = DataAccessor.Current.Commands;
+            CommandsListView.ItemsSource = CommandsDataAccessor.Current.Commands;
 
             var trayMenu = new ContextMenu();
             trayMenu.MenuItems.Add("Settings...", OnOpen);
@@ -79,7 +80,7 @@ namespace StartLauncher.App
             if (selectedCommandDto == null)
                 return;
 
-            DataAccessor.Current.DeleteCommand(selectedCommandDto);
+            CommandsDataAccessor.Current.DeleteCommand(selectedCommandDto);
         }
 
         private void CommandsListView_MouseDoubleClick(object sender, EventArgs e)

@@ -4,19 +4,20 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
+using StartLauncher.App.Core;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.DataAccess
 {
-    public class DataAccessor
+    public class CommandsDataAccessor
     {
-        private DataAccessor()
+        private CommandsDataAccessor()
         {
             Commands = new ObservableCollection<CommandDto>();
         }
 
         public ObservableCollection<CommandDto> Commands { get; }
 
-        public static DataAccessor Current { get; } = new DataAccessor();
+        public static CommandsDataAccessor Current { get; } = new CommandsDataAccessor();
 
         public FileInfo GetCommandsFile()
         {

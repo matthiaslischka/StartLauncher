@@ -61,11 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="EditWindow.xaml">
+    <Page Include="UI\EditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -73,16 +73,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CommandDto.cs" />
-    <Compile Include="CommandsPopulator.cs" />
-    <Compile Include="DataAccessor.cs" />
-    <Compile Include="ObservableCollectionExtensionMethods.cs" />
-    <Compile Include="EditWindow.xaml.cs">
+    <Compile Include="Core\CommandDto.cs" />
+    <Compile Include="DataAccess\ExecutablesAccessor.cs" />
+    <Compile Include="DataAccess\CommandsDataAccessor.cs" />
+    <Compile Include="Core\ObservableCollectionExtensions.cs" />
+    <Compile Include="UI\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileLogger.cs" />
-    <Compile Include="CommandsFileWatcher.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Core\FileLogger.cs" />
+    <Compile Include="Core\CommandsDataFileWatcher.cs" />
+    <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

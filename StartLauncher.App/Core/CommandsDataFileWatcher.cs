@@ -1,15 +1,16 @@
 ﻿using System;
 using System.IO;
+using StartLauncher.App.DataAccess;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.Core
 {
-    public class CommandsFileWatcher
+    public class CommandsDataFileWatcher
     {
-        private CommandsFileWatcher()
+        private CommandsDataFileWatcher()
         {
         }
 
-        public static CommandsFileWatcher Current { get; } = new CommandsFileWatcher();
+        public static CommandsDataFileWatcher Current { get; } = new CommandsDataFileWatcher();
 
         public void CreateFileWatcher(FileInfo commandFile)
         {
@@ -35,7 +36,7 @@ namespace StartLauncher.App
             if (IsFileLocked(commandFile))
                 return;
 
-            CommandsPopulator.Current.EnsureCommands();
+            ExecutablesAccessor.Current.EnsureCommands();
         }
 
         private static bool IsFileLocked(FileInfo file)
