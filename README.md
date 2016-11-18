@@ -6,11 +6,11 @@ Launcher that uses Windows Start Menu for custom Commands
 ### WIP
 
 #### Next Steps
-* Cleanup Shortcut and Command Folder on Startup
+* ~~Cleanup Shortcut and Command Folder on Startup~~
 * ~~List Commands in UI~~
 * ~~Add/Remove Commands via UI*~~
 * ~~Watch file for changes and update commands on the fly~~
-* Add to Start Menu without admin rights
+* ~~Add to Start Menu without admin rights~~
 * commands.json file path configurable
 * Multiple commands files combinable from different locations
 * Test Commands in UI Edit-View
