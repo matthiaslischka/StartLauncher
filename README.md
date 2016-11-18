@@ -18,9 +18,11 @@ Launcher that uses Windows Start Menu for custom Commands
 * Add command icons
 * Shortcuts für Add, Remove, Edit
 * (UI) Validation.
-* * Name and Command mandatory
-* * No special characters in name
-
+ * Name and Command mandatory
+ * No special characters in name
+ * Name unique
+* Autostart
+ 
 
 
 
