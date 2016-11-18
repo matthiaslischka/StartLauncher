@@ -74,7 +74,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CommandDto.cs" />
-    <Compile Include="CommandExtensions.cs" />
     <Compile Include="CommandsPopulator.cs" />
     <Compile Include="DataAccessor.cs" />
     <Compile Include="ObservableCollectionExtensionMethods.cs" />
