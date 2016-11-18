@@ -10,6 +10,7 @@ Launcher that uses Windows Start Menu for custom Commands
 * ~~List Commands in UI~~
 * *Add/Remove Commands via UI*
 * Watch file for changes and update commands on the fly
+* Add to Start Menu without admin rights
 * commands.json file path configurable
 * Multiple commands files combinable from different locations
 * Test Commands in UI Edit-View
