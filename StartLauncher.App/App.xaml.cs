@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 
 namespace StartLauncher.App
 {
@@ -10,9 +11,15 @@ namespace StartLauncher.App
             CommandsPopulator.GetInstance().EnsureCommands();
         }
 
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("An unhandled exception just occurred.\nPlease report this issue to https://github.com/matthiaslischka/StartLauncher\nThx for contributing.\n\nFind the logfile in the application folder.\n\n:)", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+#if DEBUG
+            return;
+#endif
+
+            MessageBox.Show(
+                "An unhandled exception just occurred.\nPlease report this issue to https://github.com/matthiaslischka/StartLauncher\nThx for contributing.\n\nFind the logfile in the application folder.\n\n:)",
+                "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
             FileLogger.GetInstance().Logger(e.Exception);
             e.Handled = true;
             Current.Shutdown();
