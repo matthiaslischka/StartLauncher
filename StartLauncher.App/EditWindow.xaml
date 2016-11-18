@@ -23,16 +23,19 @@
         <Label x:Name="NameLabel" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top"
                Grid.Row="0" Grid.Column="0" />
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Stretch" Height="23" Margin="5" TextWrapping="Wrap"
-                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
+                 Text="{Binding Name, UpdateSourceTrigger=Explicit}" VerticalAlignment="Top" Grid.Row="1"
+                 Grid.Column="0" />
         <Label x:Name="CommandLabel" Content="Command" HorizontalAlignment="Left"
                VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" />
         <TextBox x:Name="CommandTextBox" HorizontalAlignment="Stretch" Margin="5"
-                 Text="{Binding Command, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True"
+                 Text="{Binding Command, UpdateSourceTrigger=Explicit}" VerticalAlignment="Stretch" TextWrapping="Wrap"
+                 AcceptsReturn="True"
                  Grid.Row="3" Grid.Column="0" />
         <Label x:Name="DescriptionLabel" Content="Description" HorizontalAlignment="Left"
                VerticalAlignment="Top" Grid.Row="4" Grid.Column="0" />
         <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Stretch" Height="23" Margin="5" TextWrapping="Wrap"
-                 Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Grid.Row="5" Grid.Column="0" />
+                 Text="{Binding Description, UpdateSourceTrigger=Explicit}" VerticalAlignment="Top" Grid.Row="5"
+                 Grid.Column="0" />
         <Grid Grid.Row="6" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

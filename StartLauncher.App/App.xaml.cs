@@ -5,10 +5,21 @@ namespace StartLauncher.App
 {
     public partial class App
     {
+        public App()
+        {
+            Startup += App_Startup;
+        }
+
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            StartLauncher.App.MainWindow.Current.Show();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             CommandsPopulator.Current.EnsureCommands();
+            CommandsFileWatcher.Current.CreateFileWatcher(DataAccessor.Current.GetCommandsFile());
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

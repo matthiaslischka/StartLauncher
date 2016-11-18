@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows;
@@ -9,10 +10,10 @@ namespace StartLauncher.App
 {
     public partial class MainWindow
     {
-        public MainWindow()
+        private MainWindow()
         {
             InitializeComponent();
-            Refresh();
+            CommandsListView.ItemsSource = DataAccessor.Current.Commands;
 
             var trayMenu = new ContextMenu();
             trayMenu.MenuItems.Add("Settings...", OnOpen);
@@ -28,6 +29,8 @@ namespace StartLauncher.App
 
             notifyIcon.DoubleClick += OnOpen;
         }
+
+        public static MainWindow Current { get; } = new MainWindow();
 
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -77,7 +80,6 @@ namespace StartLauncher.App
                 return;
 
             DataAccessor.Current.DeleteCommand(selectedCommandDto);
-            Refresh();
         }
 
         private void CommandsListView_MouseDoubleClick(object sender, EventArgs e)
@@ -88,15 +90,7 @@ namespace StartLauncher.App
         private void OpenEditWindow(CommandDto commandDto)
         {
             var editWindow = new EditWindow(commandDto);
-            var showDialogResult = editWindow.ShowDialog();
-            if (showDialogResult == true)
-                Refresh();
-        }
-
-        public void Refresh()
-        {
-            CommandsListView.ItemsSource = DataAccessor.Current.GetCommands();
-            CommandsListView.Items.Refresh();
+            editWindow.ShowDialog();
         }
     }
 }

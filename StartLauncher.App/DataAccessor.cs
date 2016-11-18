@@ -2,39 +2,51 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using Newtonsoft.Json;
 
 namespace StartLauncher.App
 {
     public class DataAccessor
     {
-        private ObservableCollection<CommandDto> Commands { get; set; }
-
         private DataAccessor()
         {
+            Commands = new ObservableCollection<CommandDto>();
         }
 
-        public static DataAccessor Current => new DataAccessor();
+        public ObservableCollection<CommandDto> Commands { get; }
+
+        public static DataAccessor Current { get; } = new DataAccessor();
 
         public FileInfo GetCommandsFile()
         {
             return new FileInfo(@"commands.json");
         }
 
-        public List<CommandDto> GetCommands()
+        public void ReloadCommands()
         {
-            if (!GetCommandsFile().Exists) return new List<CommandDto>();
+            if (!GetCommandsFile().Exists)
+            {
+                Commands.Clear();
+                return;
+            }
 
             using (var streamReader = new StreamReader(GetCommandsFile().FullName))
             {
                 using (var jsonTextReader = new JsonTextReader(streamReader))
                 {
-                    return new JsonSerializer().Deserialize<List<CommandDto>>(jsonTextReader) ?? new List<CommandDto>();
+                    var commandDtos = new JsonSerializer().Deserialize<List<CommandDto>>(jsonTextReader) ??
+                                      new List<CommandDto>();
+                    Application.Current.Dispatcher.Invoke(delegate
+                    {
+                        Commands.Clear();
+                        commandDtos.ForEach(Commands.Add);
+                    });
                 }
             }
         }
 
-        public void SaveCommands(List<CommandDto> commands)
+        public void SaveCommands(ObservableCollection<CommandDto> commands)
         {
             using (var streamWriter = new StreamWriter(GetCommandsFile().FullName))
             {
@@ -48,24 +60,22 @@ namespace StartLauncher.App
 
         public void DeleteCommand(CommandDto command)
         {
-            var commands = GetCommands();
-            commands.RemoveAll(c => c.Id == command.Id);
-            SaveCommands(commands);
+            Application.Current.Dispatcher.Invoke(delegate { Commands.Remove(c => c.Id == command.Id); });
+            SaveCommands(Commands);
         }
 
         public void SaveCommand(CommandDto command)
         {
-            var commands = GetCommands();
-            var persistingCommand = commands.SingleOrDefault(c => c.Id == command.Id);
+            var persistingCommand = Commands.SingleOrDefault(c => c.Id == command.Id);
             if (persistingCommand == null)
             {
                 persistingCommand = new CommandDto();
-                commands.Add(persistingCommand);
+                Application.Current.Dispatcher.Invoke(delegate { Commands.Add(persistingCommand); });
             }
             persistingCommand.Name = command.Name;
             persistingCommand.Command = command.Command;
             persistingCommand.Description = command.Description;
-            SaveCommands(commands);
+            SaveCommands(Commands);
         }
     }
 }

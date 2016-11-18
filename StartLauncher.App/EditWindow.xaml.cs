@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace StartLauncher.App
@@ -14,6 +15,10 @@ namespace StartLauncher.App
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            NameTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            CommandTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            DescriptionTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
             DataAccessor.Current.SaveCommand((CommandDto) DataContext);
             DialogResult = true;
             Close();

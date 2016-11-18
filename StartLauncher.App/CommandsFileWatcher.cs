@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
 
 namespace StartLauncher.App
 {
@@ -10,7 +9,7 @@ namespace StartLauncher.App
         {
         }
 
-        public static CommandsFileWatcher Current => new CommandsFileWatcher();
+        public static CommandsFileWatcher Current { get; } = new CommandsFileWatcher();
 
         public void CreateFileWatcher(FileInfo commandFile)
         {

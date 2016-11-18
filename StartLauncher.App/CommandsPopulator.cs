@@ -11,12 +11,12 @@ namespace StartLauncher.App
         {
         }
 
-        public static CommandsPopulator Current => new CommandsPopulator();
+        public static CommandsPopulator Current { get; } = new CommandsPopulator();
 
         public void EnsureCommands()
         {
-            var commands = DataAccessor.Current.GetCommands();
-            foreach (var command in commands)
+            DataAccessor.Current.ReloadCommands();
+            foreach (var command in DataAccessor.Current.Commands)
             {
                 var commandFileInfo = command.GetCommandFileInfo();
 

@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <ListView x:Name="CommandsListView" MouseDoubleClick="CommandsListView_MouseDoubleClick" Margin="5"
-                  Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Commands}">
+                  Grid.Row="0" Grid.Column="0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Command" DisplayMemberBinding="{Binding Name}"/>
