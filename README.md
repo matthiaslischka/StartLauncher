@@ -2,10 +2,41 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/qy1io2k9kt00be3p?svg=true)](https://ci.appveyor.com/project/matthiaslischka/startlauncher)
 
-Launcher that uses Windows Start Menu for custom Commands
-### WIP
+A very lightweight launcher that uses the Windows Start Menu for custom commands.
 
-#### Next Steps
+**Configure via UI. Execute via Start Menu.**
+
+# How to use it
+Atm no installer, no nothing. Run exe and configure commands on the ui. Batch files that execute your command are created in the bin folder. Windows shortcuts are created in the current users windows start menu. Windows indexes the shortcuts within seconds. Use vie start menu.
+## No Uninstaller!
+Be Aware! Creates a folder in your users start menu. You have to delete that by hand if you want to "uninstall" the program completely.
+
+Folder is located here:
+```
+C:\Users\[YOURUSERNAME]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Start Launcher
+```
+# Screenshots
+![screenshot program](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/screenshot.png)
+
+
+![screenshot start menu](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/startmenu.png)
+# Useful commands for daily work
+**cmd.exe is the limit. there is no limit**
+Open internet explorer with new session and specific url
+```
+iexplore.exe -noframemerging http://localhost/myDevProject/start.aspx
+```
+Open windows explorer with specific path
+```
+explorer c:\Super\Annoying\Path\that\I\need\all\the\time
+```
+Open Git Extensions with specific repository
+```
+gitextensions openrepo C:\projects\startlauncher\
+```
+# WIP
+
+## Next Steps
 * ~~Cleanup Shortcut and Command Folder on Startup~~
 * ~~List Commands in UI~~
 * ~~Add/Remove Commands via UI*~~
@@ -22,12 +53,3 @@ Launcher that uses Windows Start Menu for custom Commands
  * No special characters in name
  * Name unique
 * Autostart
- 
-
-
-
-
-![screenshot program](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/screenshot.png)
-
-
-![screenshot start menu](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/startmenu.png)
