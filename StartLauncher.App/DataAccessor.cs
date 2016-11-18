@@ -35,13 +35,21 @@ namespace StartLauncher.App
             {
                 using (var jsonTextReader = new JsonTextReader(streamReader))
                 {
-                    var commandDtos = new JsonSerializer().Deserialize<List<CommandDto>>(jsonTextReader) ??
-                                      new List<CommandDto>();
-                    Application.Current.Dispatcher.Invoke(delegate
+                    try
                     {
-                        Commands.Clear();
-                        commandDtos.ForEach(Commands.Add);
-                    });
+                        Application.Current.Dispatcher.Invoke(delegate { Commands.Clear(); });
+
+                        var commandDtos = new JsonSerializer().Deserialize<List<CommandDto>>(jsonTextReader) ??
+                                          new List<CommandDto>();
+                        Application.Current.Dispatcher.Invoke(delegate
+                        {
+                            Commands.Clear();
+                            commandDtos.ForEach(Commands.Add);
+                        });
+                    }
+                    catch (JsonReaderException)
+                    {
+                    }
                 }
             }
         }

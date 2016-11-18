@@ -20,8 +20,8 @@
                   Grid.Row="0" Grid.Column="0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Command" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Command" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="300"/>
                 </GridView>
             </ListView.View>
         </ListView>
