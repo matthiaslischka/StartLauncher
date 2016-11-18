@@ -12,8 +12,7 @@ namespace StartLauncher.App
         public MainWindow()
         {
             InitializeComponent();
-
-            CommandsListView.ItemsSource = DataAccessor.GetInstance().GetCommands();
+            Refresh();
 
             var trayMenu = new ContextMenu();
             trayMenu.MenuItems.Add("Settings...", OnOpen);
@@ -36,6 +35,7 @@ namespace StartLauncher.App
             ShowInTaskbar = false;
             Visibility = Visibility.Hidden;
         }
+
         private void OnOpen(object sender, EventArgs e)
         {
             Show();
@@ -84,10 +84,18 @@ namespace StartLauncher.App
             EditButton_Click(sender, e);
         }
 
-        private static void OpenEditWindow(CommandDto commandDto)
+        private void OpenEditWindow(CommandDto commandDto)
         {
             var editWindow = new EditWindow(commandDto);
-            editWindow.Show();
+            var showDialogResult = editWindow.ShowDialog();
+            if (showDialogResult == true)
+                Refresh();
+        }
+
+        public void Refresh()
+        {
+            CommandsListView.ItemsSource = DataAccessor.GetInstance().GetCommands();
+            CommandsListView.Items.Refresh();
         }
     }
 }
