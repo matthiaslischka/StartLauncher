@@ -1,8 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using StartLauncher.App.Core;
+using StartLauncher.App.DataAccess;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.UI
 {
     public partial class EditWindow
     {
@@ -19,7 +21,7 @@ namespace StartLauncher.App
             CommandTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             DescriptionTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
-            DataAccessor.Current.SaveCommand((CommandDto) DataContext);
+            CommandsDataAccessor.Current.SaveCommand((CommandDto) DataContext);
             DialogResult = true;
             Close();
         }

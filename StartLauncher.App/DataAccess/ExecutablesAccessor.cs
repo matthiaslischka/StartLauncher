@@ -3,16 +3,17 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using IWshRuntimeLibrary;
+using StartLauncher.App.Core;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.DataAccess
 {
-    public class CommandsPopulator
+    public class ExecutablesAccessor
     {
-        private CommandsPopulator()
+        private ExecutablesAccessor()
         {
         }
 
-        public static CommandsPopulator Current { get; } = new CommandsPopulator();
+        public static ExecutablesAccessor Current { get; } = new ExecutablesAccessor();
 
         private static DirectoryInfo CommandsDirectory { get; } = new DirectoryInfo("Commands");
 
@@ -27,12 +28,12 @@ namespace StartLauncher.App
 
         public void EnsureCommands()
         {
-            DataAccessor.Current.ReloadCommands();
+            CommandsDataAccessor.Current.ReloadCommands();
 
             ClearFolder(CommandsDirectory);
             ClearFolder(AppStartMenuDirectory);
 
-            foreach (var command in DataAccessor.Current.Commands)
+            foreach (var command in CommandsDataAccessor.Current.Commands)
             {
                 var commandFileInfo = GetCommandFileInfo(command);
 

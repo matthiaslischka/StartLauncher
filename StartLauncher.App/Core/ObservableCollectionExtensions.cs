@@ -2,9 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.Core
 {
-    public static class ObservableCollectionExtensionMethods
+    public static class ObservableCollectionExtensions
     {
         public static int Remove<T>(this ObservableCollection<T> coll, Func<T, bool> condition)
         {

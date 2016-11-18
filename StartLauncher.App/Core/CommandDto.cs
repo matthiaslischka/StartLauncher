@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.Core
 {
     public class CommandDto
     {

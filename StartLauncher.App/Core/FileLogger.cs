@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace StartLauncher.App
+namespace StartLauncher.App.Core
 {
     public class FileLogger
     {
@@ -16,7 +16,7 @@ namespace StartLauncher.App
             return _fileLogger ?? (_fileLogger = new FileLogger());
         }
 
-        public void Logger(Exception exception)
+        public void Log(Exception exception)
         {
             var file = new StreamWriter("errorlog.txt", true);
             file.WriteLine($"[{DateTime.Now}]");
