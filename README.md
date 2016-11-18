@@ -17,6 +17,9 @@ Launcher that uses Windows Start Menu for custom Commands
 * "Run as Administrator" option for commands
 * Add command icons
 * Shortcuts für Add, Remove, Edit
+* (UI) Validation.
+* * Name and Command mandatory
+* * No special characters in name
 
 
 
