@@ -7,20 +7,15 @@ namespace StartLauncher.App
 {
     public class CommandsPopulator
     {
-        private static CommandsPopulator _commandsPopulator;
-
         private CommandsPopulator()
         {
         }
 
-        public static CommandsPopulator GetInstance()
-        {
-            return _commandsPopulator ?? (_commandsPopulator = new CommandsPopulator());
-        }
+        public static CommandsPopulator Current => new CommandsPopulator();
 
         public void EnsureCommands()
         {
-            var commands = DataAccessor.GetInstance().GetCommands();
+            var commands = DataAccessor.Current.GetCommands();
             foreach (var command in commands)
             {
                 var commandFileInfo = command.GetCommandFileInfo();

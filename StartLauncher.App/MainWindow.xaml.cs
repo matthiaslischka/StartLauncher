@@ -76,7 +76,8 @@ namespace StartLauncher.App
             if (selectedCommandDto == null)
                 return;
 
-            DataAccessor.GetInstance().DeleteCommand(selectedCommandDto);
+            DataAccessor.Current.DeleteCommand(selectedCommandDto);
+            Refresh();
         }
 
         private void CommandsListView_MouseDoubleClick(object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace StartLauncher.App
 
         public void Refresh()
         {
-            CommandsListView.ItemsSource = DataAccessor.GetInstance().GetCommands();
+            CommandsListView.ItemsSource = DataAccessor.Current.GetCommands();
             CommandsListView.Items.Refresh();
         }
     }

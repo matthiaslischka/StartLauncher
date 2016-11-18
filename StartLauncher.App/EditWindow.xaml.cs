@@ -14,7 +14,7 @@ namespace StartLauncher.App
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            DataAccessor.GetInstance().SaveCommand((CommandDto) DataContext);
+            DataAccessor.Current.SaveCommand((CommandDto) DataContext);
             DialogResult = true;
             Close();
         }

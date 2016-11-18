@@ -8,7 +8,7 @@ namespace StartLauncher.App
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            CommandsPopulator.GetInstance().EnsureCommands();
+            CommandsPopulator.Current.EnsureCommands();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
