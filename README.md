@@ -7,7 +7,7 @@ A very lightweight launcher that uses the Windows Start Menu for custom commands
 **Configure via UI. Execute via Start Menu.**
 
 # How to use it
-Atm no installer, no nothing. Run exe and configure commands on the ui. Batch files that execute your command are created in the bin folder. Windows shortcuts are created in the current users windows start menu. Windows indexes the shortcuts within seconds. Use vie start menu.
+ATM no installer, no nothing. Run exe and configure commands on the ui. Batch files that execute your command are created in the bin folder. Windows shortcuts are created in the current users' windows start menu. Windows indexes the shortcuts within seconds. Use vie start menu. Keeps running as taskbar program. Commands are stored in a JSON file and the file is being watched for updates as long as the program is running. For the future it is planned that the file can be placed anywhere - e.g. dropbox.
 ## No Uninstaller!
 Be Aware! Creates a folder in your users start menu. You have to delete that by hand if you want to "uninstall" the program completely.
 
