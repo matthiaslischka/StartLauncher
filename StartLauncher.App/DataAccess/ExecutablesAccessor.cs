@@ -22,7 +22,7 @@ namespace StartLauncher.App.DataAccess
             get
             {
                 var commonStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-                return new DirectoryInfo(Path.Combine(commonStartMenuPath, "Programs", "Start Launcher"));
+                return new DirectoryInfo(Path.Combine(commonStartMenuPath, "Programs", "Start Launcher","Commands"));
             }
         }
 
