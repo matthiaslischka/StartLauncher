@@ -25,14 +25,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://raw.githubusercontent.com/matthiaslischka/StartLauncher/master/publish/</InstallUrl>
+    <InstallUrl>https://raw.githubusercontent.com/matthiaslischka/StartLauncher/master/StartLauncher.App/publish/</InstallUrl>
     <SupportUrl>https://github.com/matthiaslischka/startlauncher</SupportUrl>
     <ErrorReportUrl>https://github.com/matthiaslischka/startlauncher</ErrorReportUrl>
     <ProductName>Start Lanucher</ProductName>
     <PublisherName>Matthias Lischka</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
