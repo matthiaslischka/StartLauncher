@@ -53,5 +53,8 @@ gitextensions openrepo C:\projects\startlauncher\
  * No special characters in name
  * Name unique
 * Autostart
+* Chocolatey package
+* UI styling
+
 ## Further ideas
 * Multiple commands files combinable from different locations
