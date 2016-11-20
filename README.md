@@ -43,14 +43,15 @@ gitextensions openrepo C:\projects\startlauncher\
 * ~~Add/Remove Commands via UI*~~
 * ~~Watch file for changes and update commands on the fly~~
 * ~~Add to Start Menu without admin rights~~
-* Commands.json file path configurable (project settings + UI)
-* Multiple commands files combinable from different locations
+* ~~Commands.json file path configurable (project settings + UI)~~
+* Shortcuts für Add, Remove, Edit
 * "Test Commands" button in UI edit-view
 * "Run as Administrator" option for commands
 * Add command icons
-* Shortcuts für Add, Remove, Edit
 * (UI) Validation.
  * Name and Command mandatory
  * No special characters in name
  * Name unique
 * Autostart
+## Further ideas
+* Multiple commands files combinable from different locations
