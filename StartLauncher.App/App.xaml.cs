@@ -21,7 +21,7 @@ namespace StartLauncher.App
         {
             base.OnStartup(e);
             ExecutablesAccessor.Current.EnsureCommands();
-            CommandsDataFileWatcher.Current.CreateFileWatcher(CommandsDataAccessor.Current.GetCommandsFile());
+            CommandsDataFileWatcher.Current.CreateFileWatcher();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

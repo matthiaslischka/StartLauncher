@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using StartLauncher.App.DataAccess;
 
 namespace StartLauncher.App.UI
 {
@@ -7,10 +8,13 @@ namespace StartLauncher.App.UI
         public SettingsWindow()
         {
             InitializeComponent();
+
+            CommandsJsonFilePathTextBox.Text = CommandsDataAccessor.Current.GetCommandsFile().FullName;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            CommandsDataAccessor.Current.ChangeCommandsJsonFilePath(CommandsJsonFilePathTextBox.Text);
             DialogResult = true;
             Close();
         }

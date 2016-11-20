@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
 using StartLauncher.App.Core;
+using StartLauncher.App.Properties;
 
 namespace StartLauncher.App.DataAccess
 {
@@ -21,18 +22,32 @@ namespace StartLauncher.App.DataAccess
 
         public FileInfo GetCommandsFile()
         {
-            return new FileInfo(@"commands.json");
+            return new FileInfo(Settings.Default.commandsJsonFilePath);
+        }
+
+        public void ChangeCommandsJsonFilePath(string path)
+        {
+            var newCommandsFile = new FileInfo(path);
+            var oldCommandsFile = GetCommandsFile();
+            Settings.Default.commandsJsonFilePath = newCommandsFile.FullName;
+            Settings.Default.Save();
+            SaveCommands(Commands);
+            oldCommandsFile.Delete();
         }
 
         public void ReloadCommands()
         {
-            if (!GetCommandsFile().Exists)
+            var commandsFile = GetCommandsFile();
+            if (!commandsFile.Exists)
             {
-                Commands.Clear();
+                Application.Current.Dispatcher.Invoke(delegate { Commands.Clear(); });
                 return;
             }
 
-            using (var streamReader = new StreamReader(GetCommandsFile().FullName))
+            if (FileHelper.IsFileLocked(commandsFile))
+                return;
+
+            using (var streamReader = new StreamReader(commandsFile.FullName))
             {
                 using (var jsonTextReader = new JsonTextReader(streamReader))
                 {

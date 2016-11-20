@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StartLauncher.App.UI"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="167.053" Width="289.559">
+        Title="SettingsWindow" Height="170" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -15,7 +15,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label x:Name="CommandsJsonFilePathLabel" Content="Commands Storage Path" HorizontalAlignment="Left"
+        <Label x:Name="CommandsJsonFilePathLabel" Content="Commands File" HorizontalAlignment="Left"
                VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" />
         <TextBox x:Name="CommandsJsonFilePathTextBox" HorizontalAlignment="Stretch" Height="23" Margin="5"
                  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0" />
