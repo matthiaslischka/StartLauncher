@@ -1,4 +1,4 @@
-# StartLauncher
+![icon](https://github.com/matthiaslischka/StartLauncher/blob/master/startLauncher.png?raw=true)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/qy1io2k9kt00be3p?svg=true)](https://ci.appveyor.com/project/matthiaslischka/startlauncher)
 
@@ -16,10 +16,10 @@ Folder is located here:
 C:\Users\[YOURUSERNAME]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Start Launcher
 ```
 # Screenshots
-![screenshot program](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/screenshot.png)
+![screenshot program](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/screenshot.png?raw=true)
 
 
-![screenshot start menu](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/startmenu.png)
+![screenshot start menu](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/startmenu.png?raw=true)
 # Useful commands for daily work
 **cmd.exe is the limit. there is no limit.**
 
