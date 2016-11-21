@@ -22,7 +22,7 @@ namespace StartLauncher.App.DataAccess
             get
             {
                 var commonStartMenuPath = Environment.GetFolderPath(Environment.SpecialFolder.StartMenu);
-                return new DirectoryInfo(Path.Combine(commonStartMenuPath, "Programs", "Start Launcher","Commands"));
+                return new DirectoryInfo(Path.Combine(commonStartMenuPath, "Programs", "Start Launcher", "Commands"));
             }
         }
 
@@ -90,7 +90,13 @@ namespace StartLauncher.App.DataAccess
                 try
                 {
                     shortcut.Description = command.Description;
-                    shortcut.TargetPath = GetCommandFileInfo(command).FullName;
+                    var commandFileInfo = GetCommandFileInfo(command);
+                    shortcut.TargetPath = commandFileInfo.FullName;
+
+                    var iconUrl = IconResolver.TryResolveIconUrl(command);
+                    if (!string.IsNullOrEmpty(iconUrl))
+                        shortcut.IconLocation = iconUrl;
+
                     shortcut.Save();
                 }
                 finally

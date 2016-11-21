@@ -47,7 +47,7 @@ gitextensions openrepo C:\projects\startlauncher\
 * Shortcuts für Add, Remove, Edit
 * "Test Commands" button in UI edit-view
 * "Run as Administrator" option for commands
-* Add command icons
+* ~~Add autodetected command icons~~
 * (UI) Validation.
  * Name and Command mandatory
  * No special characters in name
@@ -55,6 +55,7 @@ gitextensions openrepo C:\projects\startlauncher\
 * Autostart
 * Chocolatey package
 * UI styling
+* UI for Changing autodetected command icon
 
 ## Further ideas
 * Multiple commands files combinable from different locations

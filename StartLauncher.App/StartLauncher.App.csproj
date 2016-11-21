@@ -78,6 +78,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\FileHelper.cs" />
+    <Compile Include="DataAccess\IconResolver.cs" />
     <Compile Include="UI\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
