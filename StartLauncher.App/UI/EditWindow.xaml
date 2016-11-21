@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StartLauncher.App"
         mc:Ignorable="d"
-        Title="Edit Command" Height="280" Width="390">
+        Title="Edit Command" Height="280" Width="390"
+        Icon="../Bokehlicia-Captiva-Rocket.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
