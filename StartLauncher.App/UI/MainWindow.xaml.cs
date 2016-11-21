@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
 using StartLauncher.App.Core;
@@ -23,7 +22,7 @@ namespace StartLauncher.App.UI
             var notifyIcon = new NotifyIcon
             {
                 Text = @"Start Launcher",
-                Icon = new Icon(SystemIcons.WinLogo, 40, 40),
+                Icon = Properties.Resources.Bokehlicia_Captiva_Rocket,
                 ContextMenu = trayMenu,
                 Visible = true
             };

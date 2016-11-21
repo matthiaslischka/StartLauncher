@@ -7,7 +7,7 @@
         Title="Start Launcher" Height="400" Width="600"
         ShowInTaskbar="True"
         Visibility="Visible"
-        Icon="../Bokehlicia-Captiva-Rocket.ico">
+        Icon="../Resources/Bokehlicia-Captiva-Rocket.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StartLauncher.App.UI"
         mc:Ignorable="d"
         Title="SettingsWindow" Height="170" Width="600"
-        Icon="../Bokehlicia-Captiva-Rocket.ico">
+        Icon="../Resources/Bokehlicia-Captiva-Rocket.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
