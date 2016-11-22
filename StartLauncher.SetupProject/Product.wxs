@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define StartLauncher.App_TargetDir=$(var.StartLauncher.App.TargetDir)?>
+  <Product Id="*" Name="Start Launcher" Language="1033" Version="1.0.0.0" Manufacturer="Matthias Lischka"
+           UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="Start Launcher" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Start Launcher" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="Newtonsoft.Json.dll" Guid="ba1602c7-4c1d-4d73-93d9-9ace1534c853">
+        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll"
+              Source="$(var.StartLauncher.App_TargetDir)Newtonsoft.Json.dll" />
+      </Component>
+      <Component Id="StartLauncher.App.exe" Guid="56e34fcc-af76-4724-ba08-b031469ca4e8">
+        <File Id="StartLauncher.App.exe" Name="StartLauncher.App.exe"
+              Source="$(var.StartLauncher.App_TargetDir)StartLauncher.App.exe" />
+      </Component>
+      <Component Id="StartLauncher.App.exe.config" Guid="e0306c75-bd42-4f5e-9dd7-50bdf9d1b151">
+        <File Id="StartLauncher.App.exe.config" Name="StartLauncher.App.exe.config"
+              Source="$(var.StartLauncher.App_TargetDir)StartLauncher.App.exe.config" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
