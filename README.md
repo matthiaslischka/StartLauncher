@@ -53,6 +53,7 @@ gitextensions openrepo C:\projects\startlauncher\
  * No special characters in name
  * Name unique
 * Autostart
+* **MSI Installer**
 * Chocolatey package
 * UI styling
 * UI for Changing autodetected command icon
