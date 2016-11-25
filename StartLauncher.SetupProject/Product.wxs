@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define StartLauncher.App_TargetDir=$(var.StartLauncher.App.TargetDir)?>
-  <Product Id="*" Name="Start Launcher" Language="1033" Version="1.0.0.0" Manufacturer="Matthias Lischka"
-           UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891">
-    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define App_TargetDir=$(var.StartLauncher.App.TargetDir)?>
+  <Product Id="*" UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891" Version="1.0.0.0" Language="1033"
+           Name="Start Launcher" Manufacturer="Matthias Lischka">
+    <Package InstallerVersion="300" Compressed="yes" />
     <MediaTemplate EmbedCab="yes" />
+    <Icon Id="icon.ico" SourceFile="../StartLauncher.App/Resources/Bokehlicia-Captiva-Rocket.ico" />
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
-    <Feature Id="ProductFeature" Title="Start Launcher" Level="1">
-      <ComponentGroupRef Id="ProductComponents" />
-    </Feature>
-  </Product>
-
-  <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="Start Launcher" />
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Start Launcher" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Start Launcher" />
       </Directory>
     </Directory>
-  </Fragment>
 
-  <Fragment>
-    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-      <Component Id="Newtonsoft.Json.dll" Guid="ba1602c7-4c1d-4d73-93d9-9ace1534c853">
-        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll"
-              Source="$(var.StartLauncher.App_TargetDir)Newtonsoft.Json.dll" />
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+      <Component Id="StartLauncher.exe" Guid="954DD704-9511-4874-B7F2-35CD979C0D5F">
+        <File Id="StartLauncher.exe" Source="$(var.App_TargetDir)StartLauncher.exe" KeyPath="yes"
+              Checksum="yes" />
       </Component>
-      <Component Id="StartLauncher.App.exe" Guid="56e34fcc-af76-4724-ba08-b031469ca4e8">
-        <File Id="StartLauncher.App.exe" Name="StartLauncher.App.exe"
-              Source="$(var.StartLauncher.App_TargetDir)StartLauncher.App.exe" />
+      <Component Id="Newtonsoft.Json.dll" Guid="EDF981B2-EF35-4A5C-B9BF-972553414271">
+        <File Id="Newtonsoft.Json.dll" Source="$(var.App_TargetDir)Newtonsoft.Json.dll" KeyPath="yes" />
       </Component>
-      <Component Id="StartLauncher.App.exe.config" Guid="e0306c75-bd42-4f5e-9dd7-50bdf9d1b151">
-        <File Id="StartLauncher.App.exe.config" Name="StartLauncher.App.exe.config"
-              Source="$(var.StartLauncher.App_TargetDir)StartLauncher.App.exe.config" />
+      <Component Id="FluentOptionals.dll" Guid="5ABBD89B-8EB1-43FB-88E5-22E786631A14">
+        <File Id="FluentOptionals.dll" Source="$(var.App_TargetDir)FluentOptionals.dll" KeyPath="yes" />
       </Component>
-    </ComponentGroup>
-  </Fragment>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="7B52F710-4E44-44C8-A207-37EF465AD1C2">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="Start Launcher"
+                  Description="Start Launcher"
+                  Target="[#StartLauncher.exe]"
+                  WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\StartLauncher" Name="installed" Type="integer" Value="1"
+                       KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="MainApplication" Title="Main Application" Level="1">
+      <ComponentRef Id="StartLauncher.exe" />
+      <ComponentRef Id="Newtonsoft.Json.dll" />
+      <ComponentRef Id="FluentOptionals.dll" />
+      <ComponentRef Id="ApplicationShortcut" />
+    </Feature>
+  </Product>
 </Wix>

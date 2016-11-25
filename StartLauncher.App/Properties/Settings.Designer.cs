@@ -25,7 +25,7 @@ namespace StartLauncher.App.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("commands.json")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string commandsJsonFilePath {
             get {
                 return ((string)(this["commandsJsonFilePath"]));
