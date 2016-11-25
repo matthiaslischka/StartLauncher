@@ -94,7 +94,7 @@ namespace StartLauncher.App.DataAccess
                     shortcut.TargetPath = commandFileInfo.FullName;
 
                     var iconUrl = IconResolver.TryResolveIconUrl(command);
-                    if (!string.IsNullOrEmpty(iconUrl))
+                    if (iconUrl.IsSome)
                         shortcut.IconLocation = iconUrl;
 
                     shortcut.Save();

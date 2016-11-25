@@ -55,6 +55,10 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentOptionals, Version=1.1.10.65, Culture=neutral, PublicKeyToken=8da0a663644fc363, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentOptionals.1.1.10.65\lib\net40\FluentOptionals.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
