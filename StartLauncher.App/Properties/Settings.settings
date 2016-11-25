@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="commandsJsonFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">commands.json</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
