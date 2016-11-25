@@ -46,7 +46,7 @@ namespace StartLauncher.App
             MessageBox.Show(
                 "An unhandled exception just occurred.\nPlease report this issue to https://github.com/matthiaslischka/StartLauncher\nThx for contributing.\n\nFind the logfile in the application folder.\n\n:)",
                 "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
-            FileLogger.GetInstance().Log(e.Exception);
+            FileLogger.Current.Log(e.Exception);
             e.Handled = true;
             Current.Shutdown();
         }

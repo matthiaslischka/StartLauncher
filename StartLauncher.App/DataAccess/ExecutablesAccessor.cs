@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
+using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using StartLauncher.App.Core;
 
@@ -15,7 +16,8 @@ namespace StartLauncher.App.DataAccess
 
         public static ExecutablesAccessor Current { get; } = new ExecutablesAccessor();
 
-        private static DirectoryInfo CommandsDirectory { get; } = new DirectoryInfo("Commands");
+        private static DirectoryInfo CommandsDirectory { get; } =
+            new DirectoryInfo(Path.Combine(Application.UserAppDataPath, "Commands"));
 
         private static DirectoryInfo AppStartMenuDirectory
         {
@@ -50,7 +52,6 @@ namespace StartLauncher.App.DataAccess
                 AddShortcutForCommand(command);
             }
         }
-
 
         public static FileInfo GetCommandFileInfo(CommandDto command)
         {
@@ -94,8 +95,7 @@ namespace StartLauncher.App.DataAccess
                     shortcut.TargetPath = commandFileInfo.FullName;
 
                     var iconUrl = IconResolver.TryResolveIconUrl(command);
-                    if (iconUrl.IsSome)
-                        shortcut.IconLocation = iconUrl;
+                    iconUrl.IfSome(s => shortcut.IconLocation = s);
 
                     shortcut.Save();
                 }

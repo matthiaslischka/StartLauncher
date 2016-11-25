@@ -31,9 +31,9 @@ namespace StartLauncher.App.DataAccess
             commandName = EnsureExeEnding(commandName);
             var localMachineRegistryKey = Registry.LocalMachine;
             localMachineRegistryKey =
-                localMachineRegistryKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths", true);
+                localMachineRegistryKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths");
             var commandSubKey = localMachineRegistryKey.OpenSubKey(commandName);
-            return commandSubKey?.GetValue("")?.ToString() ?? Optional.None<string>();
+            return commandSubKey?.GetValue("")?.ToString().ToOptional();
         }
 
         private static Optional<string> GetCommandPathFromEnvironmentVariables(string commandName)

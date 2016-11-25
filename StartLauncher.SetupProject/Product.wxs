@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define App_TargetDir=$(var.StartLauncher.App.TargetDir)?>
-  <Product Id="*" UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891" Version="1.0.0.0" Language="1033" Name="Start Launcher"
-Manufacturer="Matthias Lischka">
-    <Package InstallerVersion="300" Compressed="yes"/>
+  <Product Id="*" UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891" Version="1.0.0.0" Language="1033"
+           Name="Start Launcher" Manufacturer="Matthias Lischka">
+    <Package InstallerVersion="300" Compressed="yes" />
     <MediaTemplate EmbedCab="yes" />
+    <Icon Id="icon.ico" SourceFile="../StartLauncher.App/Resources/Bokehlicia-Captiva-Rocket.ico" />
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Start Launcher"/>
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Start Launcher" />
       </Directory>
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="Start Launcher"/>
+        <Directory Id="ApplicationProgramsFolder" Name="Start Launcher" />
       </Directory>
     </Directory>
 
     <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
-      <Component Id="StartLauncher.App.exe" Guid="954DD704-9511-4874-B7F2-35CD979C0D5F">
-        <File Id="StartLauncher.App.exe" Source="$(var.App_TargetDir)StartLauncher.App.exe" KeyPath="yes" Checksum="yes"/>
+      <Component Id="StartLauncher.exe" Guid="954DD704-9511-4874-B7F2-35CD979C0D5F">
+        <File Id="StartLauncher.exe" Source="$(var.App_TargetDir)StartLauncher.exe" KeyPath="yes"
+              Checksum="yes" />
       </Component>
       <Component Id="Newtonsoft.Json.dll" Guid="EDF981B2-EF35-4A5C-B9BF-972553414271">
-        <File Id="Newtonsoft.Json.dll" Source="$(var.App_TargetDir)Newtonsoft.Json.dll" KeyPath="yes"/>
+        <File Id="Newtonsoft.Json.dll" Source="$(var.App_TargetDir)Newtonsoft.Json.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="FluentOptionals.dll" Guid="5ABBD89B-8EB1-43FB-88E5-22E786631A14">
+        <File Id="FluentOptionals.dll" Source="$(var.App_TargetDir)FluentOptionals.dll" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="7B52F710-4E44-44C8-A207-37EF465AD1C2">
         <Shortcut Id="ApplicationStartMenuShortcut"
-             Name="Start Launcher"
-           Description="Start Launcher"
-            Target="[#StartLauncher.App.exe]"
-                  WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
-        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
-        <RegistryValue Root="HKCU" Key="Software\Microsoft\StartLauncher" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+                  Name="Start Launcher"
+                  Description="Start Launcher"
+                  Target="[#StartLauncher.exe]"
+                  WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\StartLauncher" Name="installed" Type="integer" Value="1"
+                       KeyPath="yes" />
       </Component>
     </DirectoryRef>
 
     <Feature Id="MainApplication" Title="Main Application" Level="1">
-      <ComponentRef Id="StartLauncher.App.exe" />
+      <ComponentRef Id="StartLauncher.exe" />
       <ComponentRef Id="Newtonsoft.Json.dll" />
+      <ComponentRef Id="FluentOptionals.dll" />
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
   </Product>
