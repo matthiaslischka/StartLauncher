@@ -1,8 +1,22 @@
 configuration: Release
 
+skip_tags: true
+
 before_build:
     nuget restore
 
 artifacts:
     path: '**\*.msi'
     name: StartLauncherInstaller
+    
+deploy:
+    release: StartLauncher-v$(appveyor_build_version)
+    description: 'Start Launcher'
+    provider: GitHub
+    auth_token:
+        secure: MidR5T9SuBalncsh2ACJNGHmZzsmGYj3yHt1phhIX1Wlafm0TxRr5fztAfPe7c4d
+    artifact: StartLauncherInstaller
+    draft: false
+    prerelease: false
+    on:
+        branch: master    
