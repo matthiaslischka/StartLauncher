@@ -16,8 +16,8 @@ namespace StartLauncher.App.DataAccess
 
         public static ExecutablesAccessor Current { get; } = new ExecutablesAccessor();
 
-        private static DirectoryInfo CommandsDirectory { get; } =
-            new DirectoryInfo(Path.Combine(Application.UserAppDataPath, "Commands"));
+        private static DirectoryInfo CommandsDirectory
+            => new DirectoryInfo(Path.Combine(Application.UserAppDataPath, "Commands"));
 
         private static DirectoryInfo AppStartMenuDirectory
         {

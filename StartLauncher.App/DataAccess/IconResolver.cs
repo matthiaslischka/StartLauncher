@@ -33,7 +33,9 @@ namespace StartLauncher.App.DataAccess
             localMachineRegistryKey =
                 localMachineRegistryKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths");
             var commandSubKey = localMachineRegistryKey.OpenSubKey(commandName);
-            return commandSubKey?.GetValue("")?.ToString().ToOptional();
+
+            var commandPath = commandSubKey?.GetValue("")?.ToString();
+            return commandPath.ToOptional();
         }
 
         private static Optional<string> GetCommandPathFromEnvironmentVariables(string commandName)
