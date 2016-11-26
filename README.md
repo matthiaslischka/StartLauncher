@@ -46,19 +46,17 @@ gitextensions openrepo C:\projects\startlauncher\
 * ~~Watch file for changes and update commands on the fly~~
 * ~~Add to Start Menu without admin rights~~
 * ~~Commands.json file path configurable (project settings + UI)~~
-* Shortcuts für Add, Remove, Edit
-* "Test Commands" button in UI edit-view
-* "Run as Administrator" option for commands
+* ~~Shortcuts für Add, Remove, Edit~~
+* ~~"Test Commands" button in UI edit-view~~
+* ~~"Run as Administrator" option for commands~~
 * ~~Add autodetected command icons~~
 * (UI) Validation.
  * Name and Command mandatory
  * No special characters in name
  * Name unique
 * Autostart
-* **MSI Installer**
+* ~~MSI Installer~~
 * Chocolatey package
 * UI styling
 * UI for Changing autodetected command icon
-
-## Further ideas
-* Multiple commands files combinable from different locations
+* reevaluate architecture
