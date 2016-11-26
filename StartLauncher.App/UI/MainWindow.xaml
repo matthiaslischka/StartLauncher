@@ -37,14 +37,14 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddButton" Content="Add..." HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top"
+            <Button x:Name="AddButton" Content="_Add..." HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top"
                     Width="75" Click="AddButton_Click" Grid.Row="0" Grid.Column="0" />
-            <Button x:Name="EditButton" Content="Edit..." HorizontalAlignment="Right" Margin="5"
+            <Button x:Name="EditButton" Content="_Edit..." HorizontalAlignment="Right" Margin="5"
                     VerticalAlignment="Top"
                     Width="75" Click="EditButton_Click" Grid.Row="1" Grid.Column="0" />
-            <Button x:Name="RemoveButton" Content="Remove" HorizontalAlignment="Right" Margin="5"
+            <Button x:Name="RemoveButton" Content="_Remove" HorizontalAlignment="Right" Margin="5"
                     VerticalAlignment="Top" Width="75" Click="RemoveButton_Click" Grid.Row="2" Grid.Column="0" />
-            <Button x:Name="SettingsButton" Content="Settings..." HorizontalAlignment="Right" Margin="5"
+            <Button x:Name="SettingsButton" Content="_Settings..." HorizontalAlignment="Right" Margin="5"
                     VerticalAlignment="Bottom" Width="75" Grid.Row="3" Grid.Column="0" Click="SettingsButton_Click" />
         </Grid>
     </Grid>

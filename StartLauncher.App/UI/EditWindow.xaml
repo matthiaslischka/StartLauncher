@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StartLauncher.App"
         mc:Ignorable="d"
-        Title="Edit Command" Height="280" Width="390"
+        Title="Edit Command" Height="350" Width="390"
         Icon="../Resources/Bokehlicia-Captiva-Rocket.ico">
     <Grid>
         <Grid.RowDefinitions>
@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -37,18 +38,25 @@
         <TextBox x:Name="DescriptionTextBox" HorizontalAlignment="Stretch" Height="23" Margin="5" TextWrapping="Wrap"
                  Text="{Binding Description, UpdateSourceTrigger=Explicit}" VerticalAlignment="Top" Grid.Row="5"
                  Grid.Column="0" />
-        <Grid Grid.Row="6" Grid.Column="0">
+        <CheckBox x:Name="RunAsAdminCheckBox" Content="Run as Administrator"
+                  IsChecked="{Binding RunAsAdmin, UpdateSourceTrigger=Explicit}" HorizontalAlignment="Left" Margin="5"
+                  Grid.Row="6" VerticalAlignment="Top" />
+        <Grid Grid.Row="7" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Bottom"
+            <Button x:Name="SaveButton" Content="_Save" HorizontalAlignment="Left" Margin="5"
+                    VerticalAlignment="Bottom"
                     Width="75" Click="SaveButton_Click" Grid.Row="0" Grid.Column="0" IsDefault="True" />
-            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="5"
-                    VerticalAlignment="Bottom" Width="75" Grid.Row="0" Grid.Column="1" Click="CancelButton_Click"
+            <Button x:Name="TestButton" Content="_Test" HorizontalAlignment="Left" Margin="5,5,0,0"
+                    VerticalAlignment="Top" Width="75" Grid.Row="0" Grid.Column="1" Click="TestButton_Click" />
+            <Button x:Name="CancelButton" Content="_Cancel" HorizontalAlignment="Right" Margin="5"
+                    VerticalAlignment="Bottom" Width="75" Grid.Row="0" Grid.Column="2" Click="CancelButton_Click"
                     IsCancel="True" />
         </Grid>
     </Grid>

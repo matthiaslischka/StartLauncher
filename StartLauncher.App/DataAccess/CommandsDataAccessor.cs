@@ -99,6 +99,7 @@ namespace StartLauncher.App.DataAccess
             persistingCommand.Name = command.Name;
             persistingCommand.Command = command.Command;
             persistingCommand.Description = command.Description;
+            persistingCommand.RunAsAdmin = command.RunAsAdmin;
             SaveCommands(Commands);
         }
     }
