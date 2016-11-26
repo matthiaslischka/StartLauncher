@@ -14,7 +14,9 @@
         <Directory Id="APPLICATIONROOTDIRECTORY" Name="Start Launcher" />
       </Directory>
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="Start Launcher" />
+        <Directory Id="ApplicationProgramsFolder" Name="Start Launcher">
+          <Directory Id="CommandsFolder" Name="Commands" />
+        </Directory>
       </Directory>
     </Directory>
 
@@ -44,11 +46,22 @@
       </Component>
     </DirectoryRef>
 
+    <DirectoryRef Id="CommandsFolder">
+      <Component Id="EmptyCommandsFolder" Guid="46F81F9A-A12E-42A0-B41B-481D15B1A91D">
+        <CreateFolder />
+        <RemoveFolder Id="CommandsFolder" On="uninstall" />
+        <RemoveFile Id="PurgeCommandsFolder" Name="*.*" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\StartLauncher" Name="installed" Type="integer" Value="1"
+                       KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
     <Feature Id="MainApplication" Title="Main Application" Level="1">
       <ComponentRef Id="StartLauncher.exe" />
       <ComponentRef Id="Newtonsoft.Json.dll" />
       <ComponentRef Id="FluentOptionals.dll" />
       <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="EmptyCommandsFolder" />
     </Feature>
   </Product>
 </Wix>
