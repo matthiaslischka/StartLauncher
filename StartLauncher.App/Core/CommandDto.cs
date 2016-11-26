@@ -13,6 +13,7 @@ namespace StartLauncher.App.Core
         public string Name { get; set; }
         public string Command { get; set; }
         public string Description { get; set; }
+        public bool RunAsAdmin { get; set; }
 
         public override string ToString()
         {

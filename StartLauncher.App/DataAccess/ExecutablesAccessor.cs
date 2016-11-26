@@ -98,6 +98,9 @@ namespace StartLauncher.App.DataAccess
                     iconUrl.IfSome(s => shortcut.IconLocation = s);
 
                     shortcut.Save();
+
+                    if (command.RunAsAdmin)
+                        SetShortcutToRunAsAdministrator(shortcutFileInfo);
                 }
                 finally
                 {
@@ -107,6 +110,15 @@ namespace StartLauncher.App.DataAccess
             finally
             {
                 Marshal.FinalReleaseComObject(shell);
+            }
+        }
+
+        private static void SetShortcutToRunAsAdministrator(FileInfo shortcutFileInfo)
+        {
+            using (var fs = new FileStream(shortcutFileInfo.FullName, FileMode.Open, FileAccess.ReadWrite))
+            {
+                fs.Seek(21, SeekOrigin.Begin);
+                fs.WriteByte(0x22);
             }
         }
     }

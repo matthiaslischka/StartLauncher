@@ -21,6 +21,7 @@ namespace StartLauncher.App.UI
             NameTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             CommandTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             DescriptionTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            RunAsAdminCheckBox.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
 
             CommandsDataAccessor.Current.SaveCommand((CommandDto) DataContext);
             DialogResult = true;
