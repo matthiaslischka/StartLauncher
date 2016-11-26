@@ -29,9 +29,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="5"
+            <Button x:Name="SaveButton" Content="_Save" HorizontalAlignment="Left" Margin="5"
                     VerticalAlignment="Top" Width="75" IsDefault="True" Grid.Row="0" Grid.Column="0" Click="SaveButton_Click" />
-            <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="5"
+            <Button x:Name="CancelButton" Content="_Cancel" HorizontalAlignment="Right" Margin="5"
                     VerticalAlignment="Top" Width="75" IsCancel="True" Grid.Row="0" Grid.Column="1" Click="CancelButton_Click" />
         </Grid>
     </Grid>
