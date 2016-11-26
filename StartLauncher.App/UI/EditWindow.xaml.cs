@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using StartLauncher.App.Core;
@@ -29,6 +30,20 @@ namespace StartLauncher.App.UI
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            var process = new Process();
+            var startInfo = new ProcessStartInfo
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                FileName = "cmd.exe",
+                Arguments = "/C start \"\" /B " + CommandTextBox.Text,
+                UseShellExecute = false
+            };
+            process.StartInfo = startInfo;
+            process.Start();
         }
     }
 }
