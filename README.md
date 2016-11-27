@@ -13,15 +13,15 @@ Use as developer or for testing only. App runs in system tray and minimizes back
 ## be aware
 Since it is still alpha you may experience crashes or loss of shortcuts you have already configured. Uninstall may not clear everything - although it should work but you never know.
 
-Folder is located here:
+Start Menu Folder is located here:
 ```
 C:\Users\[YOURUSERNAME]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Start Launcher
 ```
 # Screenshots
-![screenshot program](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/screenshot.png?raw=true)
+![screenshot program](screenshot.png?raw=true)
 
 
-![screenshot start menu](https://raw.githubusercontent.com/matthiaslischka/startlauncher/master/startmenu.png?raw=true)
+![screenshot start menu](startmenu.png?raw=true)
 # Useful commands for daily work
 **cmd.exe is the limit. there is no limit.**
 
@@ -46,19 +46,17 @@ gitextensions openrepo C:\projects\startlauncher\
 * ~~Watch file for changes and update commands on the fly~~
 * ~~Add to Start Menu without admin rights~~
 * ~~Commands.json file path configurable (project settings + UI)~~
-* Shortcuts für Add, Remove, Edit
-* "Test Commands" button in UI edit-view
-* "Run as Administrator" option for commands
+* ~~Shortcuts für Add, Remove, Edit~~
+* ~~"Test Commands" button in UI edit-view~~
+* ~~"Run as Administrator" option for commands~~
 * ~~Add autodetected command icons~~
 * (UI) Validation.
  * Name and Command mandatory
  * No special characters in name
  * Name unique
 * Autostart
-* **MSI Installer**
+* ~~MSI Installer~~
 * Chocolatey package
 * UI styling
 * UI for Changing autodetected command icon
-
-## Further ideas
-* Multiple commands files combinable from different locations
+* reevaluate architecture
