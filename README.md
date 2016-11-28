@@ -37,7 +37,7 @@ Open Git Extensions with specific repository
 ```
 gitextensions openrepo C:\projects\startlauncher\
 ```
-Fetch all and open Git Excentions with this specific repository afterwards
+Fetch all and open Git Extensions with this specific repository afterwards
 ```
 cmd /c "cd C:\projects\startlauncher\ & git fetch --all & start gitextensions"
 ```
