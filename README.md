@@ -54,13 +54,15 @@ cmd /c "cd C:\projects\startlauncher\ & git fetch --all & start gitextensions"
 * ~~"Test Commands" button in UI edit-view~~
 * ~~"Run as Administrator" option for commands~~
 * ~~Add autodetected command icons~~
-* (UI) Validation.
+* ~~MSI Installer~~
+* **Test alpha in daily work**
+* **! Logging (To file where user is always permitted)**
+* UI for Changing autodetected command icon
+* reevaluate architecture
+* simple (UI) Validation
  * Name and Command mandatory
  * No special characters in name
  * Name unique
 * Autostart
-* ~~MSI Installer~~
 * Chocolatey package
 * UI styling
-* UI for Changing autodetected command icon
-* reevaluate architecture
