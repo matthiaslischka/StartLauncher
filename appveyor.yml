@@ -16,7 +16,7 @@ deploy:
     auth_token:
         secure: MidR5T9SuBalncsh2ACJNGHmZzsmGYj3yHt1phhIX1Wlafm0TxRr5fztAfPe7c4d
     artifact: StartLauncherInstaller
-    draft: false
-    prerelease: false
+    draft: true
+    prerelease: true
     on:
         branch: master    
