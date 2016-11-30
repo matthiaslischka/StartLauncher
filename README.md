@@ -41,6 +41,10 @@ Fetch all and open Git Extensions with this specific repository afterwards
 ```
 cmd /c "cd C:\projects\startlauncher\ & git fetch --all & start gitextensions"
 ```
+Cleanup tmp folder incl. all files and subfolders
+```
+cmd /c "rmdir c:\tmp /S /Q & mkdir c:\tmp"
+```
 # WIP
 
 ## Next Steps
