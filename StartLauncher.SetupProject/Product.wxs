@@ -31,6 +31,12 @@
       <Component Id="FluentOptionals.dll" Guid="5ABBD89B-8EB1-43FB-88E5-22E786631A14">
         <File Id="FluentOptionals.dll" Source="$(var.App_TargetDir)FluentOptionals.dll" KeyPath="yes" />
       </Component>
+      <Component Id="MahApps.Metro.dll" Guid="D3895947-31BC-4A75-B220-2218E845D3A1">
+        <File Id="MahApps.Metro.dll" Source="$(var.App_TargetDir)MahApps.Metro.dll" KeyPath="yes" />
+      </Component>
+      <Component Id="System.Windows.Interactivity.dll" Guid="363ADFE2-A757-424C-B863-740303042C31">
+        <File Id="System.Windows.Interactivity.dll" Source="$(var.App_TargetDir)System.Windows.Interactivity.dll" KeyPath="yes" />
+      </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
@@ -60,6 +66,8 @@
       <ComponentRef Id="StartLauncher.exe" />
       <ComponentRef Id="Newtonsoft.Json.dll" />
       <ComponentRef Id="FluentOptionals.dll" />
+      <ComponentRef Id="MahApps.Metro.dll" />
+      <ComponentRef Id="System.Windows.Interactivity.dll" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="EmptyCommandsFolder" />
     </Feature>
