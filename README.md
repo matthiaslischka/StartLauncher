@@ -59,6 +59,7 @@ cmd /c "rmdir c:\tmp /S /Q & mkdir c:\tmp"
 * ~~"Run as Administrator" option for commands~~
 * ~~Add autodetected command icons~~
 * ~~MSI Installer~~
+* ~~basic UI styling~~
 * **Test alpha in daily work**
 * **! Logging (To file where user is always permitted)**
 * UI for Changing autodetected command icon
@@ -69,4 +70,3 @@ cmd /c "rmdir c:\tmp /S /Q & mkdir c:\tmp"
  * Name unique
 * Autostart
 * Chocolatey package
-* UI styling
