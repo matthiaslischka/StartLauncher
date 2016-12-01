@@ -10,10 +10,11 @@ namespace StartLauncher.App.UI
 {
     public partial class EditWindow
     {
-        private readonly CommandsDataAccessor _commandsDataAccessor = CommandsDataAccessor.Current;
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
 
-        public EditWindow(CommandDto commandDto)
+        public EditWindow(CommandDto commandDto, ICommandsDataAccessor commandsDataAccessor)
         {
+            _commandsDataAccessor = commandsDataAccessor;
             InitializeComponent();
             DataContext = commandDto;
             Loaded += (sender, e) => MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
@@ -25,7 +26,7 @@ namespace StartLauncher.App.UI
             CommandTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             DescriptionTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             RunAsAdminCheckBox.GetBindingExpression(ToggleButton.IsCheckedProperty).UpdateSource();
-            ;
+            
             _commandsDataAccessor.SaveCommand((CommandDto) DataContext);
             DialogResult = true;
             Close();

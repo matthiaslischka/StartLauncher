@@ -5,10 +5,11 @@ namespace StartLauncher.App.UI
 {
     public partial class SettingsWindow
     {
-        private readonly CommandsDataAccessor _commandsDataAccessor = CommandsDataAccessor.Current;
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
 
-        public SettingsWindow()
+        public SettingsWindow(ICommandsDataAccessor commandsDataAccessor)
         {
+            _commandsDataAccessor = commandsDataAccessor;
             InitializeComponent();
 
             CommandsJsonFilePathTextBox.Text = _commandsDataAccessor.GetCommandsFile().FullName;

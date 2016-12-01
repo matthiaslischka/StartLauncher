@@ -1,27 +1,26 @@
 ﻿using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
 
 namespace StartLauncher.Tests
 {
     [TestClass]
-    public class IconResolverTests
+    public class SimpleIconResolverTests
     {
+        private readonly SimpleIconResolver _simpleIconResolver = new SimpleIconResolver();
+
         [TestMethod]
         public void TryResolveIconUrl_WithInvalidCharacter_DoesNotThrow()
         {
-            var commandDtoWithInvalidCharacterCommand = new CommandDto {Command = "\""};
-            Action tryResolveIconUrl = () => { IconResolver.TryResolveIconUrl(commandDtoWithInvalidCharacterCommand); };
+            Action tryResolveIconUrl = () => { _simpleIconResolver.TryResolveIconUrl("\""); };
             tryResolveIconUrl.ShouldNotThrow();
         }
 
         [TestMethod]
         public void TryResolveIconUrl_WithInvalidCharacter_ReturnsNone()
         {
-            var commandDtoWithInvalidCharacterCommand = new CommandDto {Command = "\""};
-            var tryResolveIconUrlReslt = IconResolver.TryResolveIconUrl(commandDtoWithInvalidCharacterCommand);
+            var tryResolveIconUrlReslt = _simpleIconResolver.TryResolveIconUrl("\"");
             tryResolveIconUrlReslt.IsNone.Should().BeTrue();
         }
     }

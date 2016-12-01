@@ -10,16 +10,15 @@ namespace StartLauncher.App.UI
 {
     public partial class MainWindow
     {
-        private readonly CommandsDataAccessor _commandsDataAccessor = CommandsDataAccessor.Current;
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
 
-        private MainWindow()
+        public MainWindow(ICommandsDataAccessor commandsDataAccessor)
         {
+            _commandsDataAccessor = commandsDataAccessor;
             InitializeComponent();
             CommandsListView.ItemsSource = _commandsDataAccessor.Commands;
             InitializeTrayNotifyIcon();
         }
-
-        public static MainWindow Current { get; } = new MainWindow();
 
         private void InitializeTrayNotifyIcon()
         {
@@ -81,7 +80,7 @@ namespace StartLauncher.App.UI
 
         private void OpenEditWindow(CommandDto commandDto)
         {
-            var editWindow = new EditWindow(commandDto);
+            var editWindow = new EditWindow(commandDto, _commandsDataAccessor);
             editWindow.ShowDialog();
         }
 
@@ -100,7 +99,7 @@ namespace StartLauncher.App.UI
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow();
+            var settingsWindow = new SettingsWindow(_commandsDataAccessor);
             settingsWindow.ShowDialog();
         }
     }

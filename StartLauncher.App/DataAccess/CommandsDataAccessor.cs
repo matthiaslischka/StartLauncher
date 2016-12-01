@@ -9,16 +9,25 @@ using StartLauncher.App.Properties;
 
 namespace StartLauncher.App.DataAccess
 {
-    public class CommandsDataAccessor
+    public interface ICommandsDataAccessor
     {
-        private CommandsDataAccessor()
+        FileInfo GetCommandsFile();
+        void SaveCommands(ObservableCollection<CommandDto> commands);
+        void ChangeCommandsJsonFilePath(string path);
+        void ReloadCommands();
+        ObservableCollection<CommandDto> Commands { get; }
+        void SaveCommand(CommandDto command);
+        void DeleteCommand(CommandDto command);
+    }
+
+    public class CommandsDataAccessor : ICommandsDataAccessor
+    {
+        public CommandsDataAccessor()
         {
             Commands = new ObservableCollection<CommandDto>();
         }
 
         public ObservableCollection<CommandDto> Commands { get; }
-
-        public static CommandsDataAccessor Current { get; } = new CommandsDataAccessor();
 
         public FileInfo GetCommandsFile()
         {

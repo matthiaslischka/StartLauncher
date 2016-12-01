@@ -8,13 +8,21 @@ using StartLauncher.App.Core;
 
 namespace StartLauncher.App.DataAccess
 {
-    public class ExecutablesAccessor
+    public interface IExecutablesAccessor
     {
-        private ExecutablesAccessor()
-        {
-        }
+        void EnsureCommands();
+    }
 
-        public static ExecutablesAccessor Current { get; } = new ExecutablesAccessor();
+    public class ExecutablesAccessor : IExecutablesAccessor
+    {
+        private readonly IIconResolver _iconResolver;
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
+
+        public ExecutablesAccessor(IIconResolver iconResolver, ICommandsDataAccessor commandsDataAccessor)
+        {
+            _iconResolver = iconResolver;
+            _commandsDataAccessor = commandsDataAccessor;
+        }
 
         private static DirectoryInfo CommandsDirectory
             => new DirectoryInfo(Path.Combine(Application.UserAppDataPath, "Commands"));
@@ -30,12 +38,12 @@ namespace StartLauncher.App.DataAccess
 
         public void EnsureCommands()
         {
-            CommandsDataAccessor.Current.ReloadCommands();
+            _commandsDataAccessor.ReloadCommands();
 
             ClearFolder(CommandsDirectory);
             ClearFolder(AppStartMenuDirectory);
 
-            foreach (var command in CommandsDataAccessor.Current.Commands)
+            foreach (var command in _commandsDataAccessor.Commands)
             {
                 var commandFileInfo = GetCommandFileInfo(command);
 
@@ -72,7 +80,7 @@ namespace StartLauncher.App.DataAccess
                 dir.Delete(true);
         }
 
-        private static void AddShortcutForCommand(CommandDto command)
+        private void AddShortcutForCommand(CommandDto command)
         {
             if (!AppStartMenuDirectory.Exists)
             {
@@ -93,8 +101,7 @@ namespace StartLauncher.App.DataAccess
                     shortcut.Description = command.Description;
                     var commandFileInfo = GetCommandFileInfo(command);
                     shortcut.TargetPath = commandFileInfo.FullName;
-
-                    var iconUrl = IconResolver.TryResolveIconUrl(command);
+                    var iconUrl = _iconResolver.TryResolveIconUrl(command.Command);
                     iconUrl.IfSome(s => shortcut.IconLocation = s);
 
                     shortcut.Save();
