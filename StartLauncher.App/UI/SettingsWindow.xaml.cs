@@ -5,16 +5,18 @@ namespace StartLauncher.App.UI
 {
     public partial class SettingsWindow
     {
+        private readonly CommandsDataAccessor _commandsDataAccessor = CommandsDataAccessor.Current;
+
         public SettingsWindow()
         {
             InitializeComponent();
 
-            CommandsJsonFilePathTextBox.Text = CommandsDataAccessor.Current.GetCommandsFile().FullName;
+            CommandsJsonFilePathTextBox.Text = _commandsDataAccessor.GetCommandsFile().FullName;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            CommandsDataAccessor.Current.ChangeCommandsJsonFilePath(CommandsJsonFilePathTextBox.Text);
+            _commandsDataAccessor.ChangeCommandsJsonFilePath(CommandsJsonFilePathTextBox.Text);
             DialogResult = true;
             Close();
         }
