@@ -46,11 +46,15 @@ namespace StartLauncher.App.DataAccess
 
             var values = Environment.GetEnvironmentVariable("PATH");
             foreach (var path in values.Split(';'))
-            {
-                var fullPath = Path.Combine(path, commandName);
-                if (File.Exists(fullPath))
-                    return fullPath;
-            }
+                try
+                {
+                    var fullPath = Path.Combine(path, commandName);
+                    if (File.Exists(fullPath))
+                        return fullPath;
+                }
+                catch (ArgumentException)
+                {
+                }
             return Optional.None<string>();
         }
 
