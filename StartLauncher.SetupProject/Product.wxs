@@ -2,7 +2,7 @@
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define App_TargetDir=$(var.StartLauncher.App.TargetDir)?>
-  <Product Id="*" UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891" Version="1.0.0.0" Language="1033"
+  <Product Id="A1580E73-B49E-4A9D-A271-57AE6A045B90" UpgradeCode="f8d33dc0-2581-4d63-aeec-e05fada15891" Version="1.0.0.0" Language="1033"
            Name="Start Launcher" Manufacturer="Matthias Lischka">
     <Package InstallerVersion="300" Compressed="yes" />
     <MediaTemplate EmbedCab="yes" />
@@ -20,24 +20,24 @@
       </Directory>
     </Directory>
 
-    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
-      <Component Id="StartLauncher.exe" Guid="954DD704-9511-4874-B7F2-35CD979C0D5F">
-        <File Id="StartLauncher.exe" Source="$(var.App_TargetDir)StartLauncher.exe" KeyPath="yes"
-              Checksum="yes" />
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY" />
+    <ComponentGroup Id="BinComponent" Directory="APPLICATIONROOTDIRECTORY" Source="$(var.App_TargetDir)">
+      <Component Id="StartLauncher.exe">
+        <File Name="StartLauncher.exe" />
       </Component>
-      <Component Id="Newtonsoft.Json.dll" Guid="EDF981B2-EF35-4A5C-B9BF-972553414271">
-        <File Id="Newtonsoft.Json.dll" Source="$(var.App_TargetDir)Newtonsoft.Json.dll" KeyPath="yes" />
+      <Component Id="Newtonsoft.Json.dll">
+        <File Name="Newtonsoft.Json.dll" />
       </Component>
-      <Component Id="FluentOptionals.dll" Guid="5ABBD89B-8EB1-43FB-88E5-22E786631A14">
-        <File Id="FluentOptionals.dll" Source="$(var.App_TargetDir)FluentOptionals.dll" KeyPath="yes" />
+      <Component Id="FluentOptionals.dll">
+        <File Name="FluentOptionals.dll" />
       </Component>
-      <Component Id="MahApps.Metro.dll" Guid="D3895947-31BC-4A75-B220-2218E845D3A1">
-        <File Id="MahApps.Metro.dll" Source="$(var.App_TargetDir)MahApps.Metro.dll" KeyPath="yes" />
+      <Component Id="MahApps.Metro.dll">
+        <File Name="MahApps.Metro.dll" />
       </Component>
-      <Component Id="System.Windows.Interactivity.dll" Guid="363ADFE2-A757-424C-B863-740303042C31">
-        <File Id="System.Windows.Interactivity.dll" Source="$(var.App_TargetDir)System.Windows.Interactivity.dll" KeyPath="yes" />
+      <Component Id="System.Windows.Interactivity.dll">
+        <File Name="System.Windows.Interactivity.dll" />
       </Component>
-    </DirectoryRef>
+    </ComponentGroup>
 
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="7B52F710-4E44-44C8-A207-37EF465AD1C2">
@@ -63,11 +63,7 @@
     </DirectoryRef>
 
     <Feature Id="MainApplication" Title="Main Application" Level="1">
-      <ComponentRef Id="StartLauncher.exe" />
-      <ComponentRef Id="Newtonsoft.Json.dll" />
-      <ComponentRef Id="FluentOptionals.dll" />
-      <ComponentRef Id="MahApps.Metro.dll" />
-      <ComponentRef Id="System.Windows.Interactivity.dll" />
+      <ComponentGroupRef Id="BinComponent" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="EmptyCommandsFolder" />
     </Feature>
