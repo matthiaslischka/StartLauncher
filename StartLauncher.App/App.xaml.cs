@@ -11,28 +11,16 @@ namespace StartLauncher.App
 {
     public partial class App
     {
-        private readonly IExecutablesAccessor _executablesAccessor;
-        private readonly ICommandsDataFileWatcher _commandsDataFileWatcher;
-        private readonly ICommandsDataAccessor _commandsDataAccessor;
-
         private static readonly Mutex SingleInstanceApplicationMutex = new Mutex(true,
             "{333499E4-B949-48F2-8C7C-6DFBF11ED9E1}");
 
-        [STAThread]
-        public static void Main()
-        {
-            var appContainerBuilder = new AppContainerBuilder();
-            var appContainer = appContainerBuilder.Build();
-            var application = appContainer.Resolve<App>();
-            application.InitializeComponent();
-            application.Run();
-        }
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
+        private readonly ICommandsDataFileWatcher _commandsDataFileWatcher;
+        private readonly IExecutablesAccessor _executablesAccessor;
 
-        public App(IExecutablesAccessor executablesAccessor, ICommandsDataFileWatcher commandsDataFileWatcher, ICommandsDataAccessor commandsDataAccessor)
+        public App(IExecutablesAccessor executablesAccessor, ICommandsDataFileWatcher commandsDataFileWatcher,
+            ICommandsDataAccessor commandsDataAccessor)
         {
-            _executablesAccessor = executablesAccessor;
-            _commandsDataFileWatcher = commandsDataFileWatcher;
-            _commandsDataAccessor = commandsDataAccessor;
             if (SingleInstanceApplicationMutex.WaitOne(TimeSpan.Zero, true))
             {
                 Startup += App_Startup;
@@ -42,6 +30,20 @@ namespace StartLauncher.App
             {
                 Shutdown();
             }
+
+            _executablesAccessor = executablesAccessor;
+            _commandsDataFileWatcher = commandsDataFileWatcher;
+            _commandsDataAccessor = commandsDataAccessor;
+        }
+
+        [STAThread]
+        public static void Main()
+        {
+            var appContainerBuilder = new AppContainerBuilder();
+            var appContainer = appContainerBuilder.Build();
+            var application = appContainer.Resolve<App>();
+            application.InitializeComponent();
+            application.Run();
         }
 
         private void App_Startup(object sender, StartupEventArgs e)
