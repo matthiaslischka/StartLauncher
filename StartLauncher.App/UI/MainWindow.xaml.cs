@@ -17,6 +17,12 @@ namespace StartLauncher.App.UI
             _commandsDataAccessor = commandsDataAccessor;
             InitializeComponent();
             CommandsListView.ItemsSource = _commandsDataAccessor.Commands;
+            CommandsListView.Items.SortDescriptions.Add(new SortDescription
+            {
+                PropertyName = "Name",
+                Direction = ListSortDirection.Ascending
+            });
+            CommandsListView.Columns[0].SortDirection = ListSortDirection.Ascending;
             InitializeTrayNotifyIcon();
         }
 
