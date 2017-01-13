@@ -7,11 +7,16 @@ using StartLauncher.App.Core;
 
 namespace StartLauncher.App.DataAccess
 {
-    public class IconResolver
+    public interface IIconResolver
     {
-        public static Optional<string> TryResolveIconUrl(CommandDto command)
+        Optional<string> TryResolveIconUrl(string command);
+    }
+
+    public class SimpleIconResolver : IIconResolver
+    {
+        public Optional<string> TryResolveIconUrl(string command)
         {
-            var firstWord = command.Command?.Split(' ').FirstOrDefault();
+            var firstWord = command?.Split(' ').FirstOrDefault();
 
             if (string.IsNullOrEmpty(firstWord))
                 return Optional.None<string>();

@@ -2,8 +2,10 @@
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
+using Autofac;
 using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
+using StartLauncher.App.UI;
 
 namespace StartLauncher.App
 {
@@ -12,7 +14,12 @@ namespace StartLauncher.App
         private static readonly Mutex SingleInstanceApplicationMutex = new Mutex(true,
             "{333499E4-B949-48F2-8C7C-6DFBF11ED9E1}");
 
-        public App()
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
+        private readonly ICommandsDataFileWatcher _commandsDataFileWatcher;
+        private readonly IExecutablesAccessor _executablesAccessor;
+
+        public App(IExecutablesAccessor executablesAccessor, ICommandsDataFileWatcher commandsDataFileWatcher,
+            ICommandsDataAccessor commandsDataAccessor)
         {
             if (SingleInstanceApplicationMutex.WaitOne(TimeSpan.Zero, true))
             {
@@ -23,18 +30,32 @@ namespace StartLauncher.App
             {
                 Shutdown();
             }
+
+            _executablesAccessor = executablesAccessor;
+            _commandsDataFileWatcher = commandsDataFileWatcher;
+            _commandsDataAccessor = commandsDataAccessor;
+        }
+
+        [STAThread]
+        public static void Main()
+        {
+            var appContainerBuilder = new AppContainerBuilder();
+            var appContainer = appContainerBuilder.Build();
+            var application = appContainer.Resolve<App>();
+            application.InitializeComponent();
+            application.Run();
         }
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            UI.MainWindow.Current.Show();
+            new MainWindow(_commandsDataAccessor).Show();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ExecutablesAccessor.Current.EnsureCommands();
-            CommandsDataFileWatcher.Current.CreateFileWatcher();
+            _executablesAccessor.EnsureCommands();
+            _commandsDataFileWatcher.CreateFileWatcher();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

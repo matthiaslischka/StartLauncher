@@ -6,16 +6,23 @@ using StartLauncher.App.Properties;
 
 namespace StartLauncher.App.Core
 {
-    public class CommandsDataFileWatcher
+    public interface ICommandsDataFileWatcher
     {
+        void CreateFileWatcher();
+    }
+
+    public class CommandsDataFileWatcher : ICommandsDataFileWatcher
+    {
+        private readonly IExecutablesAccessor _executablesAccessor;
+        private readonly ICommandsDataAccessor _commandsDataAccessor;
         private FileSystemWatcher _watcher;
 
-        private CommandsDataFileWatcher()
+        public CommandsDataFileWatcher(IExecutablesAccessor executablesAccessor, ICommandsDataAccessor commandsDataAccessor)
         {
+            _executablesAccessor = executablesAccessor;
+            _commandsDataAccessor = commandsDataAccessor;
             Settings.Default.PropertyChanged += SettingsPropertyChanged;
         }
-
-        public static CommandsDataFileWatcher Current { get; } = new CommandsDataFileWatcher();
 
         private void SettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -24,7 +31,7 @@ namespace StartLauncher.App.Core
 
         public void CreateFileWatcher()
         {
-            var commandsFile = CommandsDataAccessor.Current.GetCommandsFile();
+            var commandsFile = _commandsDataAccessor.GetCommandsFile();
 
             if (commandsFile.Directory == null)
                 throw new ArgumentNullException();
@@ -41,12 +48,12 @@ namespace StartLauncher.App.Core
             _watcher.EnableRaisingEvents = true;
         }
 
-        private static void OnChanged(FileInfo commandsFile)
+        private void OnChanged(FileInfo commandsFile)
         {
             if (FileHelper.IsFileLocked(commandsFile))
                 return;
 
-            ExecutablesAccessor.Current.EnsureCommands();
+            _executablesAccessor.EnsureCommands();
         }
     }
 }

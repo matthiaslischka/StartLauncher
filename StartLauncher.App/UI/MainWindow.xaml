@@ -21,8 +21,14 @@
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
 
-        <DataGrid x:Name="CommandsListView" MouseDoubleClick="CommandsListView_MouseDoubleClick" Margin="5"
-                  Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="CommandsListView"
+                  Grid.Row="0" Grid.Column="0" Margin="5"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  IsTextSearchCaseSensitive="False"
+                  IsTextSearchEnabled="True"
+                  TextSearch.TextPath="Name"
+                  MouseDoubleClick="CommandsListView_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Command" Binding="{Binding Name}" Width="150" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300" />

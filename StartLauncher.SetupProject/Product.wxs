@@ -37,6 +37,9 @@
       <Component Id="System.Windows.Interactivity.dll">
         <File Name="System.Windows.Interactivity.dll" />
       </Component>
+      <Component Id="Autofac.dll">
+        <File Name="Autofac.dll" />
+      </Component>
     </ComponentGroup>
 
     <DirectoryRef Id="ApplicationProgramsFolder">

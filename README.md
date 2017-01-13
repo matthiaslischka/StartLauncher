@@ -22,12 +22,16 @@ C:\Users\[YOURUSERNAME]\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\St
 
 
 ![screenshot start menu](startmenu.png?raw=true)
-# Useful commands for daily work
+# Some examples of useful commands for daily work
 **cmd.exe is the limit. there is no limit.**
 
 Open internet explorer with new session and specific url
 ```
-iexplore.exe -noframemerging http://localhost/myDevProject/start.aspx
+iexplore.exe -noframemerging http://localhost/myApsNetDevProject/start.aspx
+```
+Open chrome with icognito modus (no cache)
+```
+chrome --incognito http://localhost/myAngularDevProject/#/search
 ```
 Open windows explorer with specific path
 ```

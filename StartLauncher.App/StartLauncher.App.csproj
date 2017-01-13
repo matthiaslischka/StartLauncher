@@ -53,7 +53,14 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\Bokehlicia-Captiva-Rocket.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>StartLauncher.App.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.2.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.2.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentOptionals, Version=1.1.10.65, Culture=neutral, PublicKeyToken=8da0a663644fc363, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentOptionals.1.1.10.65\lib\net40\FluentOptionals.dll</HintPath>
       <Private>True</Private>
@@ -88,12 +95,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
+    <Compile Include="AppContainerBuilder.cs" />
     <Compile Include="Core\FileHelper.cs" />
-    <Compile Include="DataAccess\IconResolver.cs" />
+    <Compile Include="DataAccess\SimpleIconResolver.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

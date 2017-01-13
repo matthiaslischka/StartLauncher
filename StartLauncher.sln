@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartLauncher.App", "StartL
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "StartLauncher.SetupProject", "StartLauncher.SetupProject\StartLauncher.SetupProject.wixproj", "{B90373B1-C08B-439F-95ED-4D940E2332D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartLauncher.Tests", "StartLauncher.Tests\StartLauncher.Tests.csproj", "{67C16327-68E2-4755-8F34-D44E66174889}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{B90373B1-C08B-439F-95ED-4D940E2332D6}.Release|Any CPU.Build.0 = Release|x86
 		{B90373B1-C08B-439F-95ED-4D940E2332D6}.Release|x86.ActiveCfg = Release|x86
 		{B90373B1-C08B-439F-95ED-4D940E2332D6}.Release|x86.Build.0 = Release|x86
+		{67C16327-68E2-4755-8F34-D44E66174889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Debug|x86.Build.0 = Debug|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Release|x86.ActiveCfg = Release|Any CPU
+		{67C16327-68E2-4755-8F34-D44E66174889}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
