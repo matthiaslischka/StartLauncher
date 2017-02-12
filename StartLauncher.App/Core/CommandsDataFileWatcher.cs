@@ -50,9 +50,6 @@ namespace StartLauncher.App.Core
 
         private void OnChanged(FileInfo commandsFile)
         {
-            if (FileHelper.IsFileLocked(commandsFile))
-                return;
-
             _executablesAccessor.EnsureCommands();
         }
     }

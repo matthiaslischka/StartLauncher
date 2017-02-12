@@ -100,7 +100,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="AppContainerBuilder.cs" />
-    <Compile Include="Core\FileHelper.cs" />
     <Compile Include="DataAccess\SimpleIconResolver.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
