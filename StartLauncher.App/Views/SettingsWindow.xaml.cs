@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using StartLauncher.App.DataAccess;
 
-namespace StartLauncher.App.UI
+namespace StartLauncher.App.Views
 {
     public partial class SettingsWindow
     {

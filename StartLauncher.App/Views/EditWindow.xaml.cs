@@ -5,8 +5,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
+using StartLauncher.App.Models;
 
-namespace StartLauncher.App.UI
+namespace StartLauncher.App.Views
 {
     public partial class EditWindow
     {

@@ -4,9 +4,10 @@ using System.Windows;
 using System.Windows.Forms;
 using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
+using StartLauncher.App.Models;
 using Application = System.Windows.Application;
 
-namespace StartLauncher.App.UI
+namespace StartLauncher.App.Views
 {
     public partial class MainWindow
     {

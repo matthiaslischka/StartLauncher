@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
 using StartLauncher.App.Core;
+using StartLauncher.App.Models;
 using StartLauncher.App.Properties;
 
 namespace StartLauncher.App.DataAccess
