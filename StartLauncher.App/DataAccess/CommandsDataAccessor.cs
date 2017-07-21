@@ -5,17 +5,18 @@ using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
 using StartLauncher.App.Core;
+using StartLauncher.App.Models;
 using StartLauncher.App.Properties;
 
 namespace StartLauncher.App.DataAccess
 {
     public interface ICommandsDataAccessor
     {
+        ObservableCollection<CommandDto> Commands { get; }
         FileInfo GetCommandsFile();
         void SaveCommands(ObservableCollection<CommandDto> commands);
         void ChangeCommandsJsonFilePath(string path);
         void ReloadCommands();
-        ObservableCollection<CommandDto> Commands { get; }
         void SaveCommand(CommandDto command);
         void DeleteCommand(CommandDto command);
     }
@@ -53,27 +54,28 @@ namespace StartLauncher.App.DataAccess
                 return;
             }
 
-            if (FileHelper.IsFileLocked(commandsFile))
-                return;
-
-            using (var streamReader = new StreamReader(commandsFile.FullName))
+            //todo cleanup
+            using (var fs = new FileStream(commandsFile.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                using (var jsonTextReader = new JsonTextReader(streamReader))
+                using (var streamReader = new StreamReader(fs))
                 {
-                    try
+                    using (var jsonTextReader = new JsonTextReader(streamReader))
                     {
-                        Application.Current.Dispatcher.Invoke(delegate { Commands.Clear(); });
-
-                        var commandDtos = new JsonSerializer().Deserialize<List<CommandDto>>(jsonTextReader) ??
-                                          new List<CommandDto>();
-                        Application.Current.Dispatcher.Invoke(delegate
+                        try
                         {
-                            Commands.Clear();
-                            commandDtos.ForEach(Commands.Add);
-                        });
-                    }
-                    catch (JsonReaderException)
-                    {
+                            Application.Current.Dispatcher.Invoke(delegate { Commands.Clear(); });
+
+                            var commandDtos = new JsonSerializer().Deserialize<List<CommandDto>>(jsonTextReader) ??
+                                              new List<CommandDto>();
+                            Application.Current.Dispatcher.Invoke(delegate
+                            {
+                                Commands.Clear();
+                                commandDtos.ForEach(Commands.Add);
+                            });
+                        }
+                        catch (JsonReaderException)
+                        {
+                        }
                     }
                 }
             }

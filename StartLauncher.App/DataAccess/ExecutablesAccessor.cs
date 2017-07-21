@@ -5,6 +5,7 @@ using System.Security.AccessControl;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using StartLauncher.App.Core;
+using StartLauncher.App.Models;
 
 namespace StartLauncher.App.DataAccess
 {

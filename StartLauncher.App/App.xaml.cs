@@ -5,7 +5,7 @@ using System.Windows.Threading;
 using Autofac;
 using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
-using StartLauncher.App.UI;
+using StartLauncher.App.Views;
 
 namespace StartLauncher.App
 {
