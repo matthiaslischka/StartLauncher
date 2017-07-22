@@ -108,6 +108,8 @@
     </Compile>
     <Compile Include="Properties\Settings.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\EditViewModel.cs" />
+    <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>

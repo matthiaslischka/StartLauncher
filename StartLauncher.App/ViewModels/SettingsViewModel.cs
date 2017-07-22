@@ -1,11 +1,10 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using StartLauncher.App.DataAccess;
 
 namespace StartLauncher.App.ViewModels
 {
-  public class SettingsViewModel : INotifyPropertyChanged
+  public class SettingsViewModel : ObservableObject
   {
     private readonly ICommandsDataAccessor _commandsDataAccessor;
 
@@ -23,7 +22,7 @@ namespace StartLauncher.App.ViewModels
       set
       {
         _commandsJsonFilePath = value;
-        RaisePropertyChanged(nameof(CommandsJsonFilePath));
+        RaisePropertyChangedEvent(nameof(CommandsJsonFilePath));
       }
     }
 
@@ -35,13 +34,5 @@ namespace StartLauncher.App.ViewModels
     );
 
     public ICommand CancelCommand => new DelegateCommand<Window>(window => window.Close());
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    protected void RaisePropertyChanged(string propertyName)
-    {
-      var handler = PropertyChanged;
-      handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
   }
 }

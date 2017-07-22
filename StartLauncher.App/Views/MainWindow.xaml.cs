@@ -87,7 +87,7 @@ namespace StartLauncher.App.Views
 
     private void OpenEditWindow(CommandDto commandDto)
     {
-      var editWindow = new EditWindow(commandDto, _commandsDataAccessor);
+      var editWindow = new EditWindow {DataContext = new EditViewModel(commandDto, _commandsDataAccessor)};
       editWindow.ShowDialog();
     }
 
