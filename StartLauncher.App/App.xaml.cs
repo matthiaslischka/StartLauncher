@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
 using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
+using StartLauncher.App.ViewModels;
 using StartLauncher.App.Views;
 
 namespace StartLauncher.App
@@ -48,7 +50,10 @@ namespace StartLauncher.App
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            new MainWindow(_commandsDataAccessor).Show();
+            new MainWindow(_commandsDataAccessor)
+            {
+                DataContext = new MainViewModel(_commandsDataAccessor.Commands, _commandsDataAccessor)
+            }.Show();
         }
 
         protected override void OnStartup(StartupEventArgs e)
