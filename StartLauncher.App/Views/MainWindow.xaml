@@ -30,7 +30,7 @@
                   IsTextSearchCaseSensitive="False"
                   IsTextSearchEnabled="True"
                   TextSearch.TextPath="Name"
-                  MouseDoubleClick="CommandsListView_MouseDoubleClick"
+                  MouseDoubleClick="{Binding EditCommand}"
                   ItemsSource="{Binding Commands}"
                   SelectedItem="{Binding SelectedCommand}">
             <DataGrid.Columns>
@@ -61,10 +61,18 @@
                     Margin="5" Width="75"
                     Grid.Row="1" Grid.Column="0" />
             
-            <Button x:Name="RemoveButton" Content="_Remove" HorizontalAlignment="Right" Margin="5"
-                    VerticalAlignment="Top" Width="75" Click="RemoveButton_Click" Grid.Row="2" Grid.Column="0" />
-            <Button x:Name="SettingsButton" Content="_Settings..." HorizontalAlignment="Right" Margin="5"
-                    VerticalAlignment="Bottom" Width="75" Grid.Row="3" Grid.Column="0" Click="SettingsButton_Click" />
+            <Button Command="{Binding RemoveCommand, Mode=OneWay}" 
+                    Content="_Remove" 
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Width="75" Margin="5" 
+                    Grid.Row="2" Grid.Column="0" />
+            
+            
+            <Button Command="{Binding SettingsCommand}"
+                    Content="_Settings..."
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="5" Width="75" 
+                    Grid.Row="3" Grid.Column="0"/>
         </Grid>
     </Grid>
 </controls:MetroWindow>

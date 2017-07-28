@@ -43,5 +43,22 @@ namespace StartLauncher.App.ViewModels
                 editWindow.ShowDialog();
             }
         );
+
+        public ICommand RemoveCommand => new DelegateCommand<Window>(window =>
+            {
+                if (SelectedCommand == null)
+                    return;
+
+                _commandsDataAccessor.DeleteCommand(SelectedCommand);
+            }
+        );
+
+        public ICommand SettingsCommand => new DelegateCommand<Window>(window =>
+            {
+                var settingsWindow =
+                    new SettingsWindow {DataContext = new SettingsViewModel(new CommandsDataAccessor())};
+                settingsWindow.ShowDialog();
+            }
+        );
     }
 }

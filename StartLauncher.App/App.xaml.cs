@@ -50,7 +50,7 @@ namespace StartLauncher.App
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            new MainWindow(_commandsDataAccessor)
+            new MainWindow()
             {
                 DataContext = new MainViewModel(_commandsDataAccessor.Commands, _commandsDataAccessor)
             }.Show();

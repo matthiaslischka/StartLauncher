@@ -2,21 +2,14 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
-using StartLauncher.App.DataAccess;
-using StartLauncher.App.Models;
-using StartLauncher.App.ViewModels;
 using Application = System.Windows.Application;
 
 namespace StartLauncher.App.Views
 {
     public partial class MainWindow
     {
-        private readonly ICommandsDataAccessor _commandsDataAccessor;
-
-        public MainWindow(ICommandsDataAccessor commandsDataAccessor)
+        public MainWindow()
         {
-            _commandsDataAccessor = commandsDataAccessor;
-
             InitializeComponent();
 
             CommandsListView.Items.SortDescriptions.Add(new SortDescription
@@ -71,25 +64,6 @@ namespace StartLauncher.App.Views
                 Hide();
 
             base.OnStateChanged(e);
-        }
-
-        private void CommandsListView_MouseDoubleClick(object sender, EventArgs e)
-        {
-            //EditButton_Click(sender, e);
-        }
-
-        private void RemoveButton_Click(object sender, EventArgs e)
-        {
-            var selectedCommandDto = CommandsListView.SelectedItem as CommandDto;
-            if (selectedCommandDto == null)
-                return;
-            _commandsDataAccessor.DeleteCommand(selectedCommandDto);
-        }
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            var settingsWindow = new SettingsWindow {DataContext = new SettingsViewModel(new CommandsDataAccessor())};
-            settingsWindow.ShowDialog();
         }
     }
 }
