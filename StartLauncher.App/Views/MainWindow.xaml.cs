@@ -17,7 +17,6 @@ namespace StartLauncher.App.Views
                 PropertyName = "Name",
                 Direction = ListSortDirection.Ascending
             });
-            CommandsListView.Columns[0].SortDirection = ListSortDirection.Ascending;
 
             InitializeTrayNotifyIcon();
         }

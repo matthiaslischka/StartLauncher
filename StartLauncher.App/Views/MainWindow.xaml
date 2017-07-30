@@ -30,11 +30,16 @@
                   IsTextSearchCaseSensitive="False"
                   IsTextSearchEnabled="True"
                   TextSearch.TextPath="Name"
-                  MouseDoubleClick="{Binding EditCommand}"
                   ItemsSource="{Binding Commands}"
                   SelectedItem="{Binding SelectedCommand}">
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding Commands/}" />
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Command" Binding="{Binding Name}" Width="150" />
+                <DataGridTextColumn Header="Command" Binding="{Binding Name}" SortDirection="Ascending" Width="150" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300" />
             </DataGrid.Columns>
         </DataGrid>
@@ -49,10 +54,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Command="{Binding AddCommand, Mode=OneWay}" 
-                    Content="_Add..." 
-                    HorizontalAlignment="Right" VerticalAlignment="Top" 
-                    Margin="5" Width="75" 
+            <Button Command="{Binding AddCommand, Mode=OneWay}"
+                    Content="_Add..."
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="5" Width="75"
                     Grid.Row="0" Grid.Column="0" />
 
             <Button Command="{Binding EditCommand, Mode=OneWay}"
@@ -60,19 +65,18 @@
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Margin="5" Width="75"
                     Grid.Row="1" Grid.Column="0" />
-            
-            <Button Command="{Binding RemoveCommand, Mode=OneWay}" 
-                    Content="_Remove" 
+
+            <Button Command="{Binding RemoveCommand, Mode=OneWay}"
+                    Content="_Remove"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Width="75" Margin="5" 
+                    Width="75" Margin="5"
                     Grid.Row="2" Grid.Column="0" />
-            
-            
+
             <Button Command="{Binding SettingsCommand}"
                     Content="_Settings..."
                     HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                    Margin="5" Width="75" 
-                    Grid.Row="3" Grid.Column="0"/>
+                    Margin="5" Width="75"
+                    Grid.Row="3" Grid.Column="0" />
         </Grid>
     </Grid>
 </controls:MetroWindow>
