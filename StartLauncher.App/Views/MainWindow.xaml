@@ -4,6 +4,7 @@
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:viewModels="clr-namespace:StartLauncher.App.ViewModels"
                       mc:Ignorable="d"
                       Title="Start Launcher" Height="400" Width="600"
                       ShowInTaskbar="True"
@@ -11,7 +12,8 @@
                       Icon="../Resources/Bokehlicia-Captiva-Rocket.ico"
                       BorderBrush="{DynamicResource AccentColorBrush}"
                       BorderThickness="1"
-                      WindowStartupLocation="CenterScreen">
+                      WindowStartupLocation="CenterScreen"
+                      d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -28,9 +30,16 @@
                   IsTextSearchCaseSensitive="False"
                   IsTextSearchEnabled="True"
                   TextSearch.TextPath="Name"
-                  MouseDoubleClick="CommandsListView_MouseDoubleClick">
+                  ItemsSource="{Binding Commands}"
+                  SelectedItem="{Binding SelectedCommand}">
+            <DataGrid.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftDoubleClick"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding Commands/}" />
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Command" Binding="{Binding Name}" Width="150" />
+                <DataGridTextColumn Header="Command" Binding="{Binding Name}" SortDirection="Ascending" Width="150" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300" />
             </DataGrid.Columns>
         </DataGrid>
@@ -45,15 +54,29 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddButton" Content="_Add..." HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top"
-                    Width="75" Click="AddButton_Click" Grid.Row="0" Grid.Column="0" />
-            <Button x:Name="EditButton" Content="_Edit..." HorizontalAlignment="Right" Margin="5"
-                    VerticalAlignment="Top"
-                    Width="75" Click="EditButton_Click" Grid.Row="1" Grid.Column="0" />
-            <Button x:Name="RemoveButton" Content="_Remove" HorizontalAlignment="Right" Margin="5"
-                    VerticalAlignment="Top" Width="75" Click="RemoveButton_Click" Grid.Row="2" Grid.Column="0" />
-            <Button x:Name="SettingsButton" Content="_Settings..." HorizontalAlignment="Right" Margin="5"
-                    VerticalAlignment="Bottom" Width="75" Grid.Row="3" Grid.Column="0" Click="SettingsButton_Click" />
+            <Button Command="{Binding AddCommand, Mode=OneWay}"
+                    Content="_Add..."
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="5" Width="75"
+                    Grid.Row="0" Grid.Column="0" />
+
+            <Button Command="{Binding EditCommand, Mode=OneWay}"
+                    Content="_Edit..."
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="5" Width="75"
+                    Grid.Row="1" Grid.Column="0" />
+
+            <Button Command="{Binding RemoveCommand, Mode=OneWay}"
+                    Content="_Remove"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Width="75" Margin="5"
+                    Grid.Row="2" Grid.Column="0" />
+
+            <Button Command="{Binding SettingsCommand}"
+                    Content="_Settings..."
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="5" Width="75"
+                    Grid.Row="3" Grid.Column="0" />
         </Grid>
     </Grid>
 </controls:MetroWindow>

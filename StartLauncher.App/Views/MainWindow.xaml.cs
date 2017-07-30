@@ -2,28 +2,22 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
-using StartLauncher.App.Core;
-using StartLauncher.App.DataAccess;
-using StartLauncher.App.Models;
 using Application = System.Windows.Application;
 
 namespace StartLauncher.App.Views
 {
     public partial class MainWindow
     {
-        private readonly ICommandsDataAccessor _commandsDataAccessor;
-
-        public MainWindow(ICommandsDataAccessor commandsDataAccessor)
+        public MainWindow()
         {
-            _commandsDataAccessor = commandsDataAccessor;
             InitializeComponent();
-            CommandsListView.ItemsSource = _commandsDataAccessor.Commands;
+
             CommandsListView.Items.SortDescriptions.Add(new SortDescription
             {
                 PropertyName = "Name",
                 Direction = ListSortDirection.Ascending
             });
-            CommandsListView.Columns[0].SortDirection = ListSortDirection.Ascending;
+
             InitializeTrayNotifyIcon();
         }
 
@@ -69,45 +63,6 @@ namespace StartLauncher.App.Views
                 Hide();
 
             base.OnStateChanged(e);
-        }
-
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            OpenEditWindow(new CommandDto());
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            var selectedCommandDto = CommandsListView.SelectedItem as CommandDto;
-            if (selectedCommandDto == null)
-                return;
-
-            OpenEditWindow(selectedCommandDto);
-        }
-
-        private void OpenEditWindow(CommandDto commandDto)
-        {
-            var editWindow = new EditWindow(commandDto, _commandsDataAccessor);
-            editWindow.ShowDialog();
-        }
-
-        private void CommandsListView_MouseDoubleClick(object sender, EventArgs e)
-        {
-            EditButton_Click(sender, e);
-        }
-
-        private void RemoveButton_Click(object sender, EventArgs e)
-        {
-            var selectedCommandDto = CommandsListView.SelectedItem as CommandDto;
-            if (selectedCommandDto == null)
-                return;
-            _commandsDataAccessor.DeleteCommand(selectedCommandDto);
-        }
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            var settingsWindow = new SettingsWindow(_commandsDataAccessor);
-            settingsWindow.ShowDialog();
         }
     }
 }
