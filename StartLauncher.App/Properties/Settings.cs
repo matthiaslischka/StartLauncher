@@ -9,7 +9,7 @@ namespace StartLauncher.App.Properties
         public Settings()
         {
             if (string.IsNullOrEmpty(commandsJsonFilePath))
-                commandsJsonFilePath = Path.Combine(Application.UserAppDataPath, "commands.json");
+                commandsJsonFilePath = "../commands.json";
         }
     }
 }
