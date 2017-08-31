@@ -49,28 +49,3 @@ Cleanup tmp folder incl. all files and subfolders
 ```
 cmd /c "rmdir c:\tmp /S /Q & mkdir c:\tmp"
 ```
-# WIP
-
-## Next Steps
-* ~~Cleanup Shortcut and Command Folder on Startup~~
-* ~~List Commands in UI~~
-* ~~Add/Remove Commands via UI*~~
-* ~~Watch file for changes and update commands on the fly~~
-* ~~Add to Start Menu without admin rights~~
-* ~~Commands.json file path configurable (project settings + UI)~~
-* ~~Shortcuts für Add, Remove, Edit~~
-* ~~"Test Commands" button in UI edit-view~~
-* ~~"Run as Administrator" option for commands~~
-* ~~Add autodetected command icons~~
-* ~~MSI Installer~~
-* ~~basic UI styling~~
-* **Test alpha in daily work**
-* **! Logging (To file where user is always permitted)**
-* UI for Changing autodetected command icon
-* reevaluate architecture
-* simple (UI) Validation
- * Name and Command mandatory
- * No special characters in name
- * Name unique
-* Autostart
-* Chocolatey package
