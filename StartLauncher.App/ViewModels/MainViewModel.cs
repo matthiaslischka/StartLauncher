@@ -52,13 +52,5 @@ namespace StartLauncher.App.ViewModels
                 _commandsDataAccessor.DeleteCommand(SelectedCommand);
             }
         );
-
-        public ICommand SettingsCommand => new DelegateCommand<Window>(window =>
-            {
-                var settingsWindow =
-                    new SettingsWindow {DataContext = new SettingsViewModel(new CommandsDataAccessor())};
-                settingsWindow.ShowDialog();
-            }
-        );
     }
 }

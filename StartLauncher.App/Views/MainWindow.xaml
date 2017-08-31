@@ -71,12 +71,6 @@
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Width="75" Margin="5"
                     Grid.Row="2" Grid.Column="0" />
-
-            <Button Command="{Binding SettingsCommand}"
-                    Content="_Settings..."
-                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                    Margin="5" Width="75"
-                    Grid.Row="3" Grid.Column="0" />
         </Grid>
     </Grid>
 </controls:MetroWindow>

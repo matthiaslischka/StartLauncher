@@ -15,7 +15,6 @@ namespace StartLauncher.App.DataAccess
         ObservableCollection<CommandDto> Commands { get; }
         FileInfo GetCommandsFile();
         void SaveCommands(ObservableCollection<CommandDto> commands);
-        void ChangeCommandsJsonFilePath(string path);
         void ReloadCommands();
         void SaveCommand(CommandDto command);
         void DeleteCommand(CommandDto command);
@@ -33,16 +32,6 @@ namespace StartLauncher.App.DataAccess
         public FileInfo GetCommandsFile()
         {
             return new FileInfo(Settings.Default.commandsJsonFilePath);
-        }
-
-        public void ChangeCommandsJsonFilePath(string path)
-        {
-            var newCommandsFile = new FileInfo(path);
-            var oldCommandsFile = GetCommandsFile();
-            Settings.Default.commandsJsonFilePath = newCommandsFile.FullName;
-            Settings.Default.Save();
-            SaveCommands(Commands);
-            oldCommandsFile.Delete();
         }
 
         public void ReloadCommands()
