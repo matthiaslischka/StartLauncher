@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("Start Launcher")]
-[assembly: AssemblyDescription("A very lightweight launcher that uses the Windows Start Menu for custom commands.")]
+[assembly: AssemblyDescription("A very lightweight launcher that enhances the Windows Start Menu with custom commands")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Start Launcher")]

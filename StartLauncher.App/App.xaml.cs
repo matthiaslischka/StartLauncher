@@ -1,8 +1,13 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
+using Squirrel;
 using StartLauncher.App.DataAccess;
 using StartLauncher.App.ViewModels;
 using StartLauncher.App.Views;
@@ -11,6 +16,7 @@ namespace StartLauncher.App
 {
     public partial class App
     {
+        public static ManualResetEvent UpdateCheckResetEvent = new ManualResetEvent(false);
         private static readonly Mutex SingleInstanceApplicationMutex = new Mutex(true,
             "{333499E4-B949-48F2-8C7C-6DFBF11ED9E1}");
 
@@ -41,6 +47,9 @@ namespace StartLauncher.App
         [STAThread]
         public static void Main()
         {
+            EnsureAppUpToDate().ContinueWith(t => Console.Error.WriteLine(t.Exception),
+                TaskContinuationOptions.OnlyOnFaulted);
+
             var appContainerBuilder = new AppContainerBuilder();
             var appContainer = appContainerBuilder.Build();
             var application = appContainer.Resolve<App>();
@@ -62,6 +71,40 @@ namespace StartLauncher.App
             _executablesAccessor.EnsureCommands();
         }
 
+        private static async Task EnsureAppUpToDate()
+        {
+            var assembly = Assembly.GetEntryAssembly();
+            var updateDotExe = Path.Combine(Path.GetDirectoryName(assembly.Location), "..", "Update.exe");
+            var isInstalled = File.Exists(updateDotExe);
+
+            //so you can run app from Dev Environment
+            if (!isInstalled)
+                return;
+
+            var updated = false;
+
+            using (var mgr = UpdateManager
+                .GitHubUpdateManager("https://github.com/matthiaslischka/StartLauncher").Result)
+            {
+                var updateInfo = await mgr.CheckForUpdate();
+                if (updateInfo.ReleasesToApply.Any())
+                {
+                    System.Console.Out.WriteLine($"Found Update {updateInfo.FutureReleaseEntry.Version}.");
+                    await mgr.UpdateApp(i => System.Console.Out.WriteLine($"Updating: {i}"));
+                    System.Console.Out.WriteLine("Update Finished.");
+                    updated = true;
+                }
+            }
+
+            if (updated)
+            {
+                System.Console.Out.WriteLine("Restarting to launch new Version.");
+                UpdateManager.RestartApp();
+            }
+
+            UpdateCheckResetEvent.Set();
+        }
+
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             MessageBox.Show(
@@ -70,6 +113,11 @@ namespace StartLauncher.App
             Console.Error.WriteLine(e.Exception);
             e.Handled = true;
             Current.Shutdown();
+        }
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            UpdateCheckResetEvent.WaitOne();
         }
     }
 }
