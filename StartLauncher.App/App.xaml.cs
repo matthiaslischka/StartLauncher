@@ -3,7 +3,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
-using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
 using StartLauncher.App.ViewModels;
 using StartLauncher.App.Views;
@@ -60,14 +59,10 @@ namespace StartLauncher.App
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-#if DEBUG
-            return;
-#endif
-
             MessageBox.Show(
-                "An unhandled exception just occurred.\nPlease report this issue to https://github.com/matthiaslischka/StartLauncher\nThx for contributing.\n\nFind the logfile in the application folder.\n\n:)",
+                "An unhandled exception just occurred.\nPlease report this issue to https://github.com/matthiaslischka/StartLauncher\nThx for contributing.\n\nSee StdErr output for more information.\n\n:)",
                 "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
-            FileLogger.Current.Log(e.Exception);
+            Console.Error.WriteLine(e.Exception);
             e.Handled = true;
             Current.Shutdown();
         }
