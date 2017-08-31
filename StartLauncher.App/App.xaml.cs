@@ -19,6 +19,14 @@ namespace StartLauncher.App
 
         public App(IExecutablesAccessor executablesAccessor, ICommandsDataAccessor commandsDataAccessor)
         {
+            EnsureApplicationRunsJustOnce();
+
+            _executablesAccessor = executablesAccessor;
+            _commandsDataAccessor = commandsDataAccessor;
+        }
+
+        private void EnsureApplicationRunsJustOnce()
+        {
             if (SingleInstanceApplicationMutex.WaitOne(TimeSpan.Zero, true))
             {
                 Startup += App_Startup;
@@ -28,9 +36,6 @@ namespace StartLauncher.App
             {
                 Shutdown();
             }
-
-            _executablesAccessor = executablesAccessor;
-            _commandsDataAccessor = commandsDataAccessor;
         }
 
         [STAThread]
