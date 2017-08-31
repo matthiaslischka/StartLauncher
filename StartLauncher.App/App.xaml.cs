@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -17,11 +16,9 @@ namespace StartLauncher.App
             "{333499E4-B949-48F2-8C7C-6DFBF11ED9E1}");
 
         private readonly ICommandsDataAccessor _commandsDataAccessor;
-        private readonly ICommandsDataFileWatcher _commandsDataFileWatcher;
         private readonly IExecutablesAccessor _executablesAccessor;
 
-        public App(IExecutablesAccessor executablesAccessor, ICommandsDataFileWatcher commandsDataFileWatcher,
-            ICommandsDataAccessor commandsDataAccessor)
+        public App(IExecutablesAccessor executablesAccessor, ICommandsDataAccessor commandsDataAccessor)
         {
             if (SingleInstanceApplicationMutex.WaitOne(TimeSpan.Zero, true))
             {
@@ -34,7 +31,6 @@ namespace StartLauncher.App
             }
 
             _executablesAccessor = executablesAccessor;
-            _commandsDataFileWatcher = commandsDataFileWatcher;
             _commandsDataAccessor = commandsDataAccessor;
         }
 
@@ -50,7 +46,7 @@ namespace StartLauncher.App
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            new MainWindow()
+            new MainWindow
             {
                 DataContext = new MainViewModel(_commandsDataAccessor.Commands, _commandsDataAccessor)
             }.Show();
@@ -60,7 +56,6 @@ namespace StartLauncher.App
         {
             base.OnStartup(e);
             _executablesAccessor.EnsureCommands();
-            _commandsDataFileWatcher.CreateFileWatcher();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

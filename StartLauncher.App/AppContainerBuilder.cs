@@ -11,7 +11,6 @@ namespace StartLauncher.App
             this.RegisterType<App>().SingleInstance();
             this.RegisterType<SimpleIconResolver>().As<IIconResolver>().SingleInstance();
             this.RegisterType<ExecutablesAccessor>().As<IExecutablesAccessor>().SingleInstance();
-            this.RegisterType<CommandsDataFileWatcher>().As<ICommandsDataFileWatcher>().SingleInstance();
             this.RegisterType<CommandsDataAccessor>().As<ICommandsDataAccessor>().SingleInstance();
         }
     }
