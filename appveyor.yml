@@ -2,6 +2,11 @@ configuration: Release
 
 before_build:
     nuget restore
+    
+skip_commits:
+    files:
+        - README.md
+        - appveyor.yml
 
 artifacts:
     path: 'Releases\*.*'
