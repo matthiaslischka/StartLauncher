@@ -25,8 +25,7 @@ namespace StartLauncher.App.DataAccess
             _commandsDataAccessor = commandsDataAccessor;
         }
 
-        private static DirectoryInfo CommandsDirectory
-            => new DirectoryInfo(Path.Combine(Application.UserAppDataPath, "Commands"));
+        private static DirectoryInfo CommandsDirectory => new DirectoryInfo("../Commands");
 
         private static DirectoryInfo AppStartMenuDirectory
         {
