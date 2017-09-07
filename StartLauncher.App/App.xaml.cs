@@ -108,6 +108,7 @@ namespace StartLauncher.App
             catch (Exception e)
             {
                 UpdateCheckResetEvent.Set();
+                Console.Error.WriteLine(e);
                 throw;
             }
         }
