@@ -9,7 +9,7 @@ skip_commits:
         - appveyor.yml
 
 artifacts:
-    path: 'Releases\*.*'
+    path: 'Releases\*'
     name: StartLauncherInstaller
 
 os: Visual Studio 2017
