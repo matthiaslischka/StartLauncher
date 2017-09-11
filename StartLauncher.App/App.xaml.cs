@@ -17,7 +17,6 @@ namespace StartLauncher.App
     public partial class App
     {
         public static ManualResetEvent UpdateCheckResetEvent = new ManualResetEvent(false);
-
         private static readonly Mutex SingleInstanceApplicationMutex = new Mutex(true,
             "{333499E4-B949-48F2-8C7C-6DFBF11ED9E1}");
 
@@ -84,33 +83,26 @@ namespace StartLauncher.App
 
             var updated = false;
 
-            try
+            using (var mgr = UpdateManager
+                .GitHubUpdateManager("https://github.com/matthiaslischka/StartLauncher").Result)
             {
-                using (var mgr = UpdateManager
-                    .GitHubUpdateManager("https://github.com/matthiaslischka/StartLauncher").Result)
+                var updateInfo = await mgr.CheckForUpdate();
+                if (updateInfo.ReleasesToApply.Any())
                 {
-                    var updateInfo = await mgr.CheckForUpdate();
-                    if (updateInfo.ReleasesToApply.Any())
-                    {
-                        Console.Out.WriteLine($"Found Update {updateInfo.FutureReleaseEntry.Version}.");
-                        await mgr.UpdateApp(i => Console.Out.WriteLine($"Updating: {i}"));
-                        Console.Out.WriteLine("Update Finished.");
-                        updated = true;
-                    }
+                    System.Console.Out.WriteLine($"Found Update {updateInfo.FutureReleaseEntry.Version}.");
+                    await mgr.UpdateApp(i => System.Console.Out.WriteLine($"Updating: {i}"));
+                    System.Console.Out.WriteLine("Update Finished.");
+                    updated = true;
                 }
+            }
 
-                if (updated)
-                {
-                    Console.Out.WriteLine("Restarting to launch new Version.");
-                    UpdateManager.RestartApp();
-                }
-            }
-            catch (Exception e)
+            if (updated)
             {
-                UpdateCheckResetEvent.Set();
-                Console.Error.WriteLine(e);
-                throw;
+                System.Console.Out.WriteLine("Restarting to launch new Version.");
+                UpdateManager.RestartApp();
             }
+
+            UpdateCheckResetEvent.Set();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
