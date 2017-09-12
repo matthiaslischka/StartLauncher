@@ -61,7 +61,7 @@ namespace StartLauncher.App
         {
             new MainWindow
             {
-                DataContext = new MainViewModel(_commandsDataAccessor.Commands, _commandsDataAccessor)
+                DataContext = new MainViewModel(_commandsDataAccessor.Commands, _commandsDataAccessor, _executablesAccessor)
             }.Show();
         }
 

@@ -9,15 +9,18 @@ namespace StartLauncher.App.ViewModels
     public class EditViewModel : CommandViewModel
     {
         private readonly ICommandsDataAccessor _commandsDataAccessor;
+        private readonly IExecutablesAccessor _executablesAccessor;
 
-        public EditViewModel(CommandDto commandDto, ICommandsDataAccessor commandsDataAccessor) : base(commandDto)
+        public EditViewModel(CommandDto commandDto, ICommandsDataAccessor commandsDataAccessor, IExecutablesAccessor executablesAccessor) : base(commandDto)
         {
             _commandsDataAccessor = commandsDataAccessor;
+            _executablesAccessor = executablesAccessor;
         }
 
         public ICommand SaveCommand => new DelegateCommand<Window>(window =>
             {
                 _commandsDataAccessor.SaveCommand(ToModel());
+                _executablesAccessor.EnsureCommands();
                 window.Close();
             }
         );

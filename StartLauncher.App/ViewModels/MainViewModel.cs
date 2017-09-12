@@ -10,10 +10,12 @@ namespace StartLauncher.App.ViewModels
     public class MainViewModel : ObservableObject
     {
         private readonly ICommandsDataAccessor _commandsDataAccessor;
+        private readonly IExecutablesAccessor _executablesAccessor;
 
-        public MainViewModel(ObservableCollection<CommandDto> commands, ICommandsDataAccessor commandsDataAccessor)
+        public MainViewModel(ObservableCollection<CommandDto> commands, ICommandsDataAccessor commandsDataAccessor, IExecutablesAccessor executablesAccessor)
         {
             _commandsDataAccessor = commandsDataAccessor;
+            _executablesAccessor = executablesAccessor;
             Commands = commands;
         }
 
@@ -25,7 +27,7 @@ namespace StartLauncher.App.ViewModels
             {
                 var editWindow = new EditWindow
                 {
-                    DataContext = new EditViewModel(new CommandDto(), _commandsDataAccessor)
+                    DataContext = new EditViewModel(new CommandDto(), _commandsDataAccessor, _executablesAccessor)
                 };
                 editWindow.ShowDialog();
             }
@@ -38,7 +40,7 @@ namespace StartLauncher.App.ViewModels
 
                 var editWindow = new EditWindow
                 {
-                    DataContext = new EditViewModel(SelectedCommand, _commandsDataAccessor)
+                    DataContext = new EditViewModel(SelectedCommand, _commandsDataAccessor, _executablesAccessor)
                 };
                 editWindow.ShowDialog();
             }
