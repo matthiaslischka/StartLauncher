@@ -6,6 +6,7 @@
     <!-- version will be replaced by MSBuild -->
     <version>0.0.0.0</version>
     <description>A very lightweight launcher that enhances the Windows Start Menu with custom commands</description>
+    <owners>Start Launcher</owners>
     <authors>matthiaslischka</authors>
     <projectUrl>https://github.com/matthiaslischka/StartLauncher</projectUrl>
     <dependencies />
