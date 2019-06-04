@@ -54,7 +54,7 @@ namespace StartLauncher.App.DataAccess
 
                 var streamWriter = new StreamWriter(commandFileInfo.FullName);
                 streamWriter.WriteLine("echo off");
-                streamWriter.WriteLine("start \"\" /B " + command.Command);
+                streamWriter.WriteLine(command.Command);
                 streamWriter.Close();
 
                 AddShortcutForCommand(command);
