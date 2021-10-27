@@ -1,7 +1,7 @@
 configuration: Release
 
 before_build:
-    nuget restore
+  - cmd: nuget restore
     
 skip_commits:
     files:
