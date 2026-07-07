@@ -1,7 +1,7 @@
 ![icon](https://github.com/matthiaslischka/StartLauncher/blob/master/startLauncher.png?raw=true)
 
 [![GitHub release](https://img.shields.io/github/release/matthiaslischka/StartLauncher.svg)](https://github.com/matthiaslischka/StartLauncher/releases/latest)
-[![Build status](https://ci.appveyor.com/api/projects/status/qy1io2k9kt00be3p?svg=true)](https://ci.appveyor.com/project/matthiaslischka/startlauncher)
+[![Build status](https://github.com/matthiaslischka/StartLauncher/actions/workflows/build.yml/badge.svg)](https://github.com/matthiaslischka/StartLauncher/actions/workflows/build.yml)
 ![OS Requirement](https://img.shields.io/badge/OS-Windows-blue.svg)
 
 A very lightweight launcher that uses the Windows Start Menu for custom commands.

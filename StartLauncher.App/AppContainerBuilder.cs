@@ -1,17 +1,23 @@
 ﻿using Autofac;
-using StartLauncher.App.Core;
 using StartLauncher.App.DataAccess;
 
 namespace StartLauncher.App
 {
-    public class AppContainerBuilder : ContainerBuilder
+    public class AppContainerBuilder
     {
+        private readonly ContainerBuilder _containerBuilder = new ContainerBuilder();
+
         public AppContainerBuilder()
         {
-            this.RegisterType<App>().SingleInstance();
-            this.RegisterType<SimpleIconResolver>().As<IIconResolver>().SingleInstance();
-            this.RegisterType<ExecutablesAccessor>().As<IExecutablesAccessor>().SingleInstance();
-            this.RegisterType<CommandsDataAccessor>().As<ICommandsDataAccessor>().SingleInstance();
+            _containerBuilder.RegisterType<App>().SingleInstance();
+            _containerBuilder.RegisterType<SimpleIconResolver>().As<IIconResolver>().SingleInstance();
+            _containerBuilder.RegisterType<ExecutablesAccessor>().As<IExecutablesAccessor>().SingleInstance();
+            _containerBuilder.RegisterType<CommandsDataAccessor>().As<ICommandsDataAccessor>().SingleInstance();
+        }
+
+        public IContainer Build()
+        {
+            return _containerBuilder.Build();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Windows;
 
+[assembly: SupportedOSPlatform("windows")]
 [assembly: AssemblyTitle("Start Launcher")]
 [assembly: AssemblyDescription("A very lightweight launcher that enhances the Windows Start Menu with custom commands")]
 [assembly: AssemblyConfiguration("")]

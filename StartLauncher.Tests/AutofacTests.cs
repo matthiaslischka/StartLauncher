@@ -14,7 +14,7 @@ namespace StartLauncher.Tests
         {
             var appContainer = new AppContainerBuilder().Build();
             Action resolveApp = () => appContainer.Resolve<App.App>();
-            resolveApp.ShouldNotThrow();
+            resolveApp.Should().NotThrow();
         }
     }
 }

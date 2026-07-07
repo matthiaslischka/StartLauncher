@@ -1,15 +1,13 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
-using Squirrel;
 using StartLauncher.App.DataAccess;
 using StartLauncher.App.ViewModels;
 using StartLauncher.App.Views;
+using Velopack;
+using Velopack.Sources;
 
 namespace StartLauncher.App
 {
@@ -29,6 +27,8 @@ namespace StartLauncher.App
 		[STAThread]
 		public static void Main()
 		{
+			VelopackApp.Build().Run();
+
 			EnsureAppUpToDate().ContinueWith(t => Console.Error.WriteLine(t.Exception),
 				TaskContinuationOptions.OnlyOnFaulted);
 
@@ -55,38 +55,20 @@ namespace StartLauncher.App
 
 		private static async Task EnsureAppUpToDate()
 		{
-			var assembly = Assembly.GetEntryAssembly();
-			var updateDotExe = Path.Combine(Path.GetDirectoryName(assembly.Location), "..", "Update.exe");
-			var isInstalled = File.Exists(updateDotExe);
+			var mgr = new UpdateManager(new GithubSource("https://github.com/matthiaslischka/StartLauncher", null, false));
 
 			//so you can run app from Dev Environment
-			if (!isInstalled)
+			if (!mgr.IsInstalled)
 				return;
 
-			var updated = false;
+			var updateInfo = await mgr.CheckForUpdatesAsync();
+			if (updateInfo == null)
+				return;
 
-			using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/myuser/myapp"))
-			{
-				await mgr.Result.UpdateApp(i => Console.Out.WriteLine($"Updating: {i}"));
-			}
-
-			using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/matthiaslischka/StartLauncher").Result)
-			{
-				var updateInfo = await mgr.CheckForUpdate();
-				if (updateInfo.ReleasesToApply.Any())
-				{
-					Console.Out.WriteLine($"Found Update {updateInfo.FutureReleaseEntry.Version}.");
-					await mgr.UpdateApp(i => Console.Out.WriteLine($"Updating: {i}"));
-					Console.Out.WriteLine("Update Finished.");
-					updated = true;
-				}
-			}
-
-			if (updated)
-			{
-				Console.Out.WriteLine("Restarting to launch new Version.");
-				UpdateManager.RestartApp();
-			}
+			Console.Out.WriteLine($"Found Update {updateInfo.TargetFullRelease.Version}.");
+			await mgr.DownloadUpdatesAsync(updateInfo, i => Console.Out.WriteLine($"Updating: {i}"));
+			Console.Out.WriteLine("Update Finished. Restarting to launch new Version.");
+			mgr.ApplyUpdatesAndRestart(updateInfo.TargetFullRelease);
 		}
 
 		private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

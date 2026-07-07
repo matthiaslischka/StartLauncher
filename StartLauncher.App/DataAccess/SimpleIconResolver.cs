@@ -24,11 +24,9 @@ namespace StartLauncher.App.DataAccess
             var firstWordWithExeEnding = firstWord.ToLower().EndsWith(".exe") ? firstWord : firstWord + ".exe";
 
             var commandPathFromRegistry = GetCommandPathFromRegistry(firstWordWithExeEnding);
-            if (commandPathFromRegistry.IsSome)
-                return commandPathFromRegistry;
-
-            var commandPathFromEnvironmentVariables = GetCommandPathFromEnvironmentVariables(firstWordWithExeEnding);
-            return commandPathFromEnvironmentVariables;
+            return commandPathFromRegistry.Match(
+                Optional.Some,
+                () => GetCommandPathFromEnvironmentVariables(firstWordWithExeEnding));
         }
 
         private static Optional<string> GetCommandPathFromRegistry(string commandName)
