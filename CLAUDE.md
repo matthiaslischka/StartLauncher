@@ -26,7 +26,11 @@ The App project has a `<COMReference>` (`IWshRuntimeLibrary`, used to create `.l
 dotnet test StartLauncher.Tests/StartLauncher.Tests.csproj -c Debug --no-build
 ```
 
-CI (`.github/workflows/build.yml`, `windows-latest`) restores via `dotnet restore`, then builds/publishes via desktop MSBuild (added to `PATH` with `microsoft/setup-msbuild`) for the same COM-reference reason as above, and runs tests via `dotnet test --no-build`. On push to `master` it additionally publishes a self-contained `win-x64` build and packages/releases it with Velopack's `vpk` CLI (`vpk pack` + `vpk upload github`).
+CI (`.github/workflows/build.yml`, `windows-latest`) restores via `dotnet restore`, then builds/publishes via desktop MSBuild (added to `PATH` with `microsoft/setup-msbuild`) for the same COM-reference reason as above, and runs tests via `dotnet test --no-build`. On push to `master` it additionally publishes a self-contained `win-x64` build and packages/releases it with Velopack's `vpk` CLI (`vpk pack` + `vpk upload github --publish --merge`).
+
+The release **version** (`1.0.<total commit count>`, via `git rev-list --count HEAD`) is deliberately independent of the assembly's own `AssemblyVersion` (which comes from `ThisAssembly.Git.BaseVersion` — a static value tied to the last git tag, `1.0.124` from 2019, that nobody has bumped since). Every push therefore gets a fresh, ascending release version automatically, with no manual tagging step. Don't switch the CI version source back to the built assembly's version without accounting for this — `vpk upload github` hard-fails if the computed version collides with an existing release tag (this is exactly what happened before this was fixed: every push kept resolving to the unbumped `1.0.124`, colliding with the pre-existing 2019 release of that tag). The job also needs `permissions: contents: write` for the same upload step, since GitHub's default `GITHUB_TOKEN` is read-only otherwise.
+
+**Squirrel-to-Velopack migration caveat**: any already-installed copy of the app predates this migration and has the old Squirrel updater compiled in — it cannot consume Velopack releases (different, incompatible update protocols). Existing installs need a one-time manual reinstall from the new `StartLauncher-win-Setup.exe`; only after that will `EnsureAppUpToDate()`'s Velopack update checks pick up future pushes automatically.
 
 ## Architecture
 

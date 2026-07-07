@@ -41,10 +41,13 @@ jobs:
       - name: Determine version
         if: github.event_name == 'push'
         id: version
-        shell: pwsh
+        shell: bash
         run: |
-          $ver = [Reflection.AssemblyName]::GetAssemblyName("$pwd\publish\StartLauncher.dll").Version
-          echo "version=$($ver.ToString(3))" >> $env:GITHUB_OUTPUT
+          # Patch = total commit count, so every push to master gets a fresh, ascending
+          # version automatically. Bump the "1.0" prefix by hand if a major/minor bump is ever needed.
+          # (The assembly's own AssemblyVersion is still git-tag-derived via GitInfo — that's
+          # independent and only used for diagnostics, not for picking the release version.)
+          echo "version=1.0.$(git rev-list --count HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Package with Velopack
         if: github.event_name == 'push'
@@ -54,4 +57,4 @@ jobs:
 
       - name: Publish release to GitHub
         if: github.event_name == 'push'
-        run: vpk upload github -o ./Releases --repoUrl https://github.com/matthiaslischka/StartLauncher --token ${{ secrets.GITHUB_TOKEN }} --publish
+        run: vpk upload github -o ./Releases --repoUrl https://github.com/matthiaslischka/StartLauncher --token ${{ secrets.GITHUB_TOKEN }} --publish --merge
