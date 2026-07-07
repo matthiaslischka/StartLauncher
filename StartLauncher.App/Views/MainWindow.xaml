@@ -15,6 +15,8 @@
                       BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
                       BorderThickness="1"
                       WindowStartupLocation="CenterScreen"
+                      FontFamily="{DynamicResource MahApps.Fonts.Family.Control}"
+                      FontSize="14"
                       d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
 
     <controls:MetroWindow.RightWindowCommands>
@@ -62,8 +64,9 @@
                       IsTextSearchCaseSensitive="False"
                       IsTextSearchEnabled="True"
                       TextSearch.TextPath="Name"
-                      AlternatingRowBackground="{DynamicResource MahApps.Brushes.Gray10}"
-                      RowHeight="30"
+                      FontSize="13"
+                      AlternationCount="2"
+                      RowHeight="32"
                       GridLinesVisibility="Horizontal"
                       HorizontalGridLinesBrush="{DynamicResource MahApps.Brushes.Gray8}"
                       HeadersVisibility="Column"
@@ -72,6 +75,42 @@
                       SelectionMode="Single"
                       ItemsSource="{Binding Commands}"
                       SelectedItem="{Binding SelectedCommand}">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}">
+                        <Setter Property="FontWeight" Value="SemiBold" />
+                        <Setter Property="FontSize" Value="13" />
+                        <Setter Property="Padding" Value="8,6" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Foreground>
+                    <DynamicResource ResourceKey="MahApps.Brushes.ThemeForeground" />
+                </DataGrid.Foreground>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MahApps.Styles.DataGridCell}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <!-- AlternationIndex trigger declared before the IsMouseOver one, so hovering an
+                         alternating row still wins (later triggers in the same style beat earlier ones) -
+                         DataGrid.AlternatingRowBackground applies via a higher-precedence mechanism that
+                         a plain IsMouseOver style trigger can never override. -->
+                    <Style TargetType="DataGridRow" BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Background.MouseOver}" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.InputBindings>
                     <MouseBinding
                         MouseAction="LeftDoubleClick"
@@ -106,7 +145,7 @@
                         Margin="0,0,0,6" Padding="0,6">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE710;" Margin="0,0,6,0" />
-                        <TextBlock Text="_Add..." />
+                        <AccessText Text="_Add..." />
                     </StackPanel>
                 </Button>
 
@@ -117,7 +156,7 @@
                         Margin="0,0,0,6" Padding="0,6">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE70F;" Margin="0,0,6,0" />
-                        <TextBlock Text="_Edit..." />
+                        <AccessText Text="_Edit..." />
                     </StackPanel>
                 </Button>
 
@@ -128,7 +167,7 @@
                         Margin="0,0,0,6" Padding="0,6">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE74D;" Margin="0,0,6,0" />
-                        <TextBlock Text="_Remove" />
+                        <AccessText Text="_Remove" />
                     </StackPanel>
                 </Button>
             </StackPanel>
