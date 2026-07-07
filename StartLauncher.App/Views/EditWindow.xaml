@@ -28,23 +28,23 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Name" FontWeight="SemiBold" FontSize="12.5" Foreground="{DynamicResource MahApps.Brushes.Gray2}" Margin="0,0,0,4" />
+            <TextBlock Text="Name" Style="{StaticResource FieldLabelStyle}" />
             <TextBox x:Name="NameTextBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextBoxHelper.Watermark="unique name"
+                     controls:TextBoxHelper.Watermark="Unique name"
                      Height="30" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="0,0,0,10">
-            <TextBlock Text="Description" FontWeight="SemiBold" FontSize="12.5" Foreground="{DynamicResource MahApps.Brushes.Gray2}" Margin="0,0,0,4" />
+            <TextBlock Text="Description" Style="{StaticResource FieldLabelStyle}" />
             <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextBoxHelper.Watermark="additional description"
+                     controls:TextBoxHelper.Watermark="Additional description"
                      Height="30" />
         </StackPanel>
 
         <StackPanel Grid.Row="2" Margin="0,0,0,10" MinHeight="90">
-            <TextBlock Text="Command" FontWeight="SemiBold" FontSize="12.5" Foreground="{DynamicResource MahApps.Brushes.Gray2}" Margin="0,0,0,4" />
+            <TextBlock Text="Command" Style="{StaticResource FieldLabelStyle}" />
             <TextBox Text="{Binding Command, UpdateSourceTrigger=PropertyChanged}"
-                     controls:TextBoxHelper.Watermark="what to execute"
+                     controls:TextBoxHelper.Watermark="What to execute"
                      FontFamily="Cascadia Mono, Consolas"
                      FontSize="13"
                      AcceptsReturn="True"
@@ -56,7 +56,7 @@
 
         <CheckBox Grid.Row="3"
                   IsChecked="{Binding RunAsAdmin, UpdateSourceTrigger=PropertyChanged}"
-                  Content="Run as Administrator"
+                  Content="Run as administrator"
                   Margin="0,0,0,4" />
 
         <Separator Grid.Row="4" Margin="0,8,0,10" />

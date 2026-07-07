@@ -82,28 +82,9 @@
                         <Setter Property="Padding" Value="8,6" />
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <DataGrid.Foreground>
-                    <DynamicResource ResourceKey="MahApps.Brushes.ThemeForeground" />
-                </DataGrid.Foreground>
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MahApps.Styles.DataGridCell}">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="Black" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.CellStyle>
                 <DataGrid.RowStyle>
-                    <!-- AlternationIndex trigger declared before the IsMouseOver one, so hovering an
-                         alternating row still wins (later triggers in the same style beat earlier ones) -
-                         DataGrid.AlternatingRowBackground applies via a higher-precedence mechanism that
-                         a plain IsMouseOver style trigger can never override. -->
                     <Style TargetType="DataGridRow" BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
                         <Style.Triggers>
-                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
-                            </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Background.MouseOver}" />
                                 <Setter Property="Foreground" Value="Black" />
@@ -181,12 +162,10 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0"
                        Text="{Binding Commands.Count, StringFormat={}{0} command(s)}"
-                       Foreground="{DynamicResource MahApps.Brushes.Gray3}"
-                       VerticalAlignment="Center" FontSize="11" />
+                       Style="{StaticResource StatusTextStyle}" />
             <TextBlock Grid.Column="1"
                        Text="Double-click or Enter to edit &#183; Delete to remove"
-                       Foreground="{DynamicResource MahApps.Brushes.Gray3}"
-                       VerticalAlignment="Center" FontSize="11" />
+                       Style="{StaticResource StatusTextStyle}" />
         </Grid>
     </Grid>
 </controls:MetroWindow>
