@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 
 namespace StartLauncher.App.ViewModels
@@ -6,10 +6,16 @@ namespace StartLauncher.App.ViewModels
   public class DelegateCommand<T> : ICommand
   {
     private readonly Action<T> _action;
+    private readonly Func<T, bool> _canExecute;
 
-    public DelegateCommand(Action<T> action)
+    public DelegateCommand(Action<T> action) : this(action, null)
+    {
+    }
+
+    public DelegateCommand(Action<T> action, Func<T, bool> canExecute)
     {
       _action = action;
+      _canExecute = canExecute;
     }
 
     public void Execute(object parameter)
@@ -19,13 +25,13 @@ namespace StartLauncher.App.ViewModels
 
     public bool CanExecute(object parameter)
     {
-      return true;
+      return _canExecute == null || _canExecute((T)parameter);
     }
 
     public event EventHandler CanExecuteChanged
     {
-      add { }
-      remove { }
+      add { CommandManager.RequerySuggested += value; }
+      remove { CommandManager.RequerySuggested -= value; }
     }
   }
 }

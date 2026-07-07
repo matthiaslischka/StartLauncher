@@ -22,7 +22,8 @@ namespace StartLauncher.App.ViewModels
                 _commandsDataAccessor.SaveCommand(ToModel());
                 _executablesAccessor.EnsureCommands();
                 window.Close();
-            }
+            },
+            window => !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Command)
         );
 
         public ICommand TestCommand => new DelegateCommand<Window>(window =>
@@ -37,7 +38,8 @@ namespace StartLauncher.App.ViewModels
                 };
                 process.StartInfo = startInfo;
                 process.Start();
-            }
+            },
+            window => !string.IsNullOrWhiteSpace(Command)
         );
 
         public ICommand CancelCommand => new DelegateCommand<Window>(window => window.Close());

@@ -21,12 +21,23 @@ namespace StartLauncher.App.ViewModels
 
         public ObservableCollection<CommandDto> Commands { get; set; }
 
-        public CommandDto SelectedCommand { get; set; }
+        private CommandDto _selectedCommand;
+
+        public CommandDto SelectedCommand
+        {
+            get => _selectedCommand;
+            set
+            {
+                _selectedCommand = value;
+                RaisePropertyChangedEvent(nameof(SelectedCommand));
+            }
+        }
 
         public ICommand AddCommand => new DelegateCommand<Window>(window =>
             {
                 var editWindow = new EditWindow
                 {
+                    Owner = window,
                     DataContext = new EditViewModel(new CommandDto(), _commandsDataAccessor, _executablesAccessor)
                 };
                 editWindow.ShowDialog();
@@ -40,10 +51,12 @@ namespace StartLauncher.App.ViewModels
 
                 var editWindow = new EditWindow
                 {
+                    Owner = window,
                     DataContext = new EditViewModel(SelectedCommand, _commandsDataAccessor, _executablesAccessor)
                 };
                 editWindow.ShowDialog();
-            }
+            },
+            window => SelectedCommand != null
         );
 
         public ICommand RemoveCommand => new DelegateCommand<Window>(window =>
@@ -51,8 +64,19 @@ namespace StartLauncher.App.ViewModels
                 if (SelectedCommand == null)
                     return;
 
+                var result = MessageBox.Show(window,
+                    $"Remove \"{SelectedCommand.Name}\"? This deletes its shortcut and batch file.",
+                    "Remove Command",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question,
+                    MessageBoxResult.No);
+
+                if (result != MessageBoxResult.Yes)
+                    return;
+
                 _commandsDataAccessor.DeleteCommand(SelectedCommand);
-            }
+            },
+            window => SelectedCommand != null
         );
     }
 }

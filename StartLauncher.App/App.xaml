@@ -1,6 +1,7 @@
 ﻿<Application x:Class="StartLauncher.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:StartLauncher.App.Core"
              DispatcherUnhandledException="Application_DispatcherUnhandledException"
              Exit="App_OnExit">
     <Application.Resources>
@@ -12,6 +13,8 @@
                 <!-- Theme setting (combines the old Colors/Accents/AppTheme dictionaries) -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <core:ZeroToVisibleConverter x:Key="ZeroToVisibleConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
