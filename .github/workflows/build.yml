@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
+    permissions:
+      contents: write # needed for vpk upload github to create the release
     steps:
       - uses: actions/checkout@v4
         with:
