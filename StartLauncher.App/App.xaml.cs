@@ -66,9 +66,25 @@ namespace StartLauncher.App
 				return;
 
 			Console.Out.WriteLine($"Found Update {updateInfo.TargetFullRelease.Version}.");
-			await mgr.DownloadUpdatesAsync(updateInfo, i => Console.Out.WriteLine($"Updating: {i}"));
-			Console.Out.WriteLine("Update Finished. Restarting to launch new Version.");
-			mgr.ApplyUpdatesAndRestart(updateInfo.TargetFullRelease);
+			await mgr.DownloadUpdatesAsync(updateInfo, i => Console.Out.WriteLine($"Downloading: {i}"));
+			Console.Out.WriteLine("Update downloaded.");
+
+			var updateNow = MessageBox.Show(
+				$"A new version ({updateInfo.TargetFullRelease.Version}) of Start Launcher is available.\n\n" +
+				"Update now? This will restart the app.\n\n" +
+				"Choosing \"No\" will apply the update automatically the next time the app closes.",
+				"Update Available", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+
+			if (updateNow)
+			{
+				Console.Out.WriteLine("Restarting to launch new Version.");
+				mgr.ApplyUpdatesAndRestart(updateInfo.TargetFullRelease);
+			}
+			else
+			{
+				Console.Out.WriteLine("Update will be applied on next launch.");
+				mgr.WaitExitThenApplyUpdates(updateInfo.TargetFullRelease, restart: false);
+			}
 		}
 
 		private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
